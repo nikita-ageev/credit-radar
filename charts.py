@@ -61,7 +61,7 @@ def _frame(fig, title, subtitle, source):
 def bars(path, labels, values, title, subtitle="", source="", unit="%",
          highlight=None, decimals=1):
     """Горизонтальные бары — сравнение конкурентов по одному показателю.
-    highlight — подпись, которую выделяем акцентом (обычно «Озон Банк»)."""
+    highlight — подпись, которую выделяем акцентом (обычно свой банк, own)."""
     n = len(labels)
     fig, ax = plt.subplots(figsize=(9, 1.05 * n + 2.6), dpi=200)
     order = sorted(range(n), key=lambda i: values[i])
