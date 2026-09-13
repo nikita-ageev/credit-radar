@@ -1,0 +1,13 @@
+state/
+out/
+evals/days/
+certs/
+fonts/
+*.env
+owner.env
+.venv/
+__pycache__/
+*.pyc
+*.log
+*.pem
+backup/

@@ -1,0 +1,73 @@
+# Кредитный радар / Credit Radar
+
+Ежедневный мониторинг условий розничного кредитования в 12 российских банках (кредитные карты, кредиты наличными, рассрочка, автокредиты), решений регулятора и новостей рынка — с публикацией в Telegram-канал и на сайт. Собран как **LLM-воркфлоу**: маршрут задан кодом, модель работает под проверками и шлюзами.
+
+Живой пример: канал [@rcradar](https://t.me/rcradar), выпуски и открытые evals — [ageev.dev/credit-radar](https://ageev.dev/credit-radar/).
+
+## Как устроено
+
+```
+обход страниц условий (headless Chromium, robots.txt) ──┐
+релизы БКИ (НБКИ, ОКБ, Скоринг Бюро) ───────────────────┤
+RSS прессы + публичные Telegram-каналы (t.me/s) ────────┼─► данные дня ─► модель (редактура, извлечение фактов)
+пресс-релизы ЦБ, форма 101/102, котировки MOEX ─────────┤          │
+отзывы (sravni.ru, banki.ru), тарифные PDF ─────────────┘          ▼
+                                             шлюз 1 (код): числа ⊆ источник, ссылки живы, стоп-слова
+                                             шлюз 2 (судья на другой модели): supported / no_hype / useful / primary
+                                             шлюз 3 (код): порог отбраковки, бюджет
+                                                            │
+                                                            ▼
+                                   канал (Bot API) · сайт (статика, sitemap, IndexNow) · снимок для evals
+```
+
+Принципы, ради которых это написано:
+
+- **Состояние и маршрут — у кода.** Модель не решает, что публиковать; она редактирует строки и извлекает факты из текста, который ей дали. Каждое число в её выводе проверяется против источника (`digest.unsupported_numbers`).
+- **Неполная страница — не изменение.** Диф двух снимков считается только при сопоставимом объёме; строка «исчезла/появилась» проверяется по архиву снимков за 7 дней (`core.stable_diff`) — так отсекается «мигание» вёрстки и антибот-заглушки.
+- **Первоисточник выше репоста.** При дедупликации новостей побеждает ссылка на релиз бюро или статью прессы, канал остаётся пометкой «через …» (`digest.source_rank`).
+- **Судья — другая модель.** Извлекает одна, проверяет другая; вердикт да/нет по пунктам, одна ревизия, повторная проверка. Не прошло — выпуск не выходит, черновик уходит владельцу.
+- **Evals уровня 1 и 2.** Каждый прогон пишет снимок входов, выходов, вердиктов и стоимости (`evals/days/`); `evals/run.py` гоняет проверки повторно и сравнивает версии.
+- **Бюджет — часть конфигурации.** Дневная стоимость считается по usage (`brain.spent`), страж понижает модель или останавливает публикации.
+
+## Модули
+
+| Файл | Что делает |
+|---|---|
+| `radar.py` | точка входа: `daily` (утренняя сводка + разбор по инфоповоду), `evening` (вечерний выпуск), `collect`, `context`, страж бюджета |
+| `core.py` | загрузка страниц (HTTP и headless Chromium), robots.txt, снимки, диффы, фильтр мигания |
+| `sources.py` | реестр банков и страниц условий, слова-маркеры изменений |
+| `digest.py` | сборка сводки из данных: изменения условий, ключевая ставка, новости, акции; проверка чисел |
+| `evening.py` | вечерний выпуск: первоисточники → текст статьи → факты (модель) → шлюзы → судья → публикация |
+| `brain.py` | вызовы моделей (Anthropic API), промпт-кэш, учёт расходов, ревьюеры |
+| `news.py`, `tgnews.py`, `bkinews.py`, `cbr_news.py` | новости: RSS, публичные Telegram-каналы, пресс-релизы бюро кредитных историй и ЦБ |
+| `tariffs.py` | тарифные PDF и страницы условий: извлечение ставок, ПСК, льготного периода, минимального платежа (с оговорками «не более/до») |
+| `signals.py`, `reviews.py`, `cbr.py` | котировки, вакансии, релиз-ноты; отзывы; формы 101/102 ЦБ |
+| `publish.py`, `sitepub.py`, `charts.py`, `style.py` | Telegram Bot API, статический сайт (выпуски, архив, RSS, sitemap, IndexNow), графики, стилевые проверки |
+| `evals/` | рубрика, повторный прогон проверок, бэкфилл снимков |
+
+## Запуск
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+cp radar.env.example radar.env       # ключи и настройки; файл в .gitignore
+set -a; . ./radar.env; set +a
+python3 radar.py selftest             # проверка окружения
+python3 radar.py daily --dry          # собрать утреннюю сводку без публикации
+python3 radar.py evening --dry        # собрать вечерний выпуск без публикации
+```
+
+Нужен Chromium/Chrome для страниц с JS (`RADAR_CHROME`), PyMuPDF для PDF. Крон на сервере: `collect` ночью, `daily` в 09:00 МСК, `evening` в 20:00 МСК.
+
+## Чего здесь нет
+
+Состояние (`state/`), выпуски (`out/`), ключи и токены, ручные копии документов, закрытых robots.txt, и всё, что относится к конкретному работодателю автора. Проект личный и не связан с работодателем.
+
+## Лицензия
+
+MIT. Автор — Никита Агеев, [ageev.dev](https://ageev.dev/).
+
+---
+
+### English summary
+
+Credit Radar is a daily monitor of retail lending terms across 12 Russian banks, regulator decisions and market news, published to a Telegram channel and a static site. It is built as an **LLM workflow, not an agent**: code owns the route and the state; the model only edits lines and extracts facts from text it was given. Every number the model emits is checked against the source; page snapshots are diffed only when comparable in size, with a 7-day archive filter against render flicker; primary sources win over channel reposts; a second model acts as a judge (supported / no hype / useful / primary) with one revision loop; a failed gate means no publication and a draft to the owner. Each run writes an eval snapshot (inputs, outputs, verdicts, cost). Daily spend is metered from API usage and a budget guard downgrades the model or stops publishing.
