@@ -460,8 +460,8 @@ def check(text, chs, news_items):
         inner = m.group(1)
         if inner.endswith(("Обыч", "категор", "Он")) or (not inner.endswith(("…", ".", "!", "?", "%", "₽")) and len(inner) >= 100):
             issues.append(f"похоже на обрыв цитаты: «{inner[-25:]}»")
-    if "Озон Банк" in text or "Ozon" in text:
-        issues.append("упомянут Озон Банк")
+    if "свой банк (own)" in text or "Ozon" in text:
+        issues.append("упомянут свой банк (own)")
     return issues
 
 

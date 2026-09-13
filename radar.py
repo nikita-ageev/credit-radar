@@ -763,7 +763,7 @@ def _quote_in(fact, ctx_norm):
 _SRC_NAMES = {"alfabank.ru": "Альфа-Банк", "sberbank.ru": "Сбербанк", "tbank.ru": "Т-Банк", "vtb.ru": "ВТБ",
     "gazprombank.ru": "Газпромбанк", "sovcombank.ru": "Совкомбанк", "mtsbank.ru": "МТС Банк", "otpbank.ru": "ОТП",
     "rencredit.ru": "Ренессанс", "uralsib.ru": "Уралсиб", "pay.yandex.ru": "Яндекс Банк", "wb-bank.ru": "ВБ Банк",
-    "finance.ozon.ru": "Озон Банк", "kommersant.ru": "Коммерсантъ", "frankmedia.ru": "Frank Media",
+    "finance.ozon.ru": "свой банк (own)", "kommersant.ru": "Коммерсантъ", "frankmedia.ru": "Frank Media",
     "vedomosti.ru": "Ведомости", "banki.ru": "Banki.ru", "cbr.ru": "Банк России", "sravni.ru": "Сравни", "moex.com": "Мосбиржа"}
 
 def _src_name(url):
