@@ -64,7 +64,7 @@ python3 radar.py evening --dry        # собрать вечерний выпу
 
 ## Лицензия
 
-MIT. Автор — Никита Агеев, [ageev.dev](https://ageev.dev/).
+MIT. Автор — Никита Агеев, [ageev.dev](https://ageev.dev/) · [github.com/nikita-ageev](https://github.com/nikita-ageev).
 
 ---
 
