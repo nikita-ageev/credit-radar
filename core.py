@@ -28,7 +28,7 @@ CHROME = os.environ.get("RADAR_CHROME") or next(
 # SPKI корневого УЦ Минцифры — чтобы Chrome доверял ТОЛЬКО ему, а не «всем подряд».
 RU_ROOT_PEM = os.path.join(HERE, "certs", "ru_root.pem")
 
-_CTX = ssl.create_default_context(cafile=BUNDLE)
+_CTX = ssl.create_default_context(cafile=BUNDLE if os.path.exists(BUNDLE) else None)   # без certs/ — системные корни
 _LAST_HIT = {}          # домен -> время последнего запроса
 _ROBOTS   = {}          # домен -> RobotFileParser
 PAUSE = 3.0             # секунд между запросами к одному домену
