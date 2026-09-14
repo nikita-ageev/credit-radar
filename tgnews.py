@@ -14,7 +14,7 @@ CHANNELS = [
     ("Рисковик", "riskovik"),
     ("ФИНСАЙД", "finside"),
     ("Финтехно", "fintexno"),
-    ("Банки, деньги, два офшора", "bankrollo"),      # инсайды и утечки, 454 тыс.; фильтр релевантности режет шум
+    # («Банки, деньги, два офшора», bankrollo) — снят 14.09.2026: рекламные посты с erid прошли в сводку; канал платный по духу
     ("Финансовый караульный", "karaulny_accountant"),  # то же, 92 тыс.
 ]
 _RX = re.compile(r'data-post="(?P<post>[^"]+)".*?tgme_widget_message_text[^>]*>(?P<html>.*?)</div>.*?<time datetime="(?P<dt>[^"]+)"', re.S)
@@ -29,6 +29,11 @@ def _text(h):
 def fetch(channel, timeout=20):
     req = urllib.request.Request(f"https://t.me/s/{channel}", headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/128.0 Safari/537.36"})
     return urllib.request.urlopen(req, timeout=timeout).read().decode("utf-8", "ignore")
+
+_PRESS_HOST = re.compile(r"https?://([a-z0-9-]+\.)*(frankmedia\.ru|frankrg\.com|kommersant\.ru|vedomosti\.ru|rbc\.ru|interfax\.ru|tass\.ru|"
+                         r"banki\.ru|cbr\.ru|nbki\.ru|bki-okb\.ru|scoring\.ru|iz\.ru|forbes\.ru|expert\.ru|finmarket\.ru|"
+                         r"kremlin\.ru|government\.ru|minfin\.gov\.ru|fedsfm\.ru|e-disclosure\.ru|moex\.com)(/|$)", re.I)
+
 
 def items(hours=36):
     """Посты за последние `hours` часов из всех каналов. Заголовок — первая строка/предложение (≤120 знаков)."""
@@ -58,9 +63,13 @@ def items(hours=36):
             if first.count("»") > first.count("«"):                     # «Слово» в начале — кавычку открывающую вернуть
                 first = "«" + first
             ext = re.findall(r'href="(https?://(?!t\.me/)[^"]+)"', m["html"])
-            ext = [u for u in ext if not re.search(r"telegram\.org|tgme|/s/|max\.ru|vk\.com|youtube|youtu\.be|sendsay|bit\.ly|clck\.ru|dzen\.ru|\.link/", u)]
-            link = html.unescape(ext[0]) if ext else f"https://t.me/{m['post']}"
-            out.append(dict(src=name, title=first, link=link, desc=text[:400], dt=dt, via=f"https://t.me/{m['post']}"))
+            ext = [html.unescape(u) for u in ext if not re.search(r"telegram\.org|tgme|/s/|max\.ru|vk\.com|youtube|youtu\.be|sendsay|bit\.ly|clck\.ru|dzen\.ru|\.link/", u)]
+            # 14.09.2026: источник строки — сам пост канала. Внешняя ссылка идёт в link только если это СМИ/регулятор/БКИ
+            # (первоисточник); ссылки на страницы банков и прочее из постов — это промо, а не источник (гейт gate.py).
+            press = [u for u in ext if _PRESS_HOST.search(u)]
+            via = f"https://t.me/{m['post']}"
+            link = press[0] if press else via
+            out.append(dict(src=name, title=first, link=link, desc=text[:400], dt=dt, via=via, ext=ext[:3]))
     return out, errs
 
 if __name__ == "__main__":

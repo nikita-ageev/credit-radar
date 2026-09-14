@@ -740,9 +740,16 @@ def _owner_hold_window(caption, text):
     return True
 
 def _notify_owner(text):
-    """Личное сообщение владельцу: токен бота и chat_id — из окружения (RADAR_OWNER_BOT_TOKEN, RADAR_OWNER_CHAT_ID)."""
-    env = {"TG_BOT_TOKEN": os.environ.get("RADAR_OWNER_BOT_TOKEN") or os.environ.get("RADAR_TG_TOKEN"),
-           "OWNER_CHAT_ID": os.environ.get("RADAR_OWNER_CHAT_ID")}
+    """Личное сообщение владельцу через токен Джарвиса (лежит рядом на сервере)."""
+    env = {}
+    for path in ("/opt/jarvis/advisor.env", os.path.join(HERE, "..", "Инструменты", "advisor.env")):
+        try:
+            for line in open(path, encoding="utf-8"):
+                if "=" in line and not line.startswith("#"):
+                    k, v = line.strip().split("=", 1); env[k] = v.strip().strip('"')
+            break
+        except Exception:
+            continue
     tok, chat = env.get("TG_BOT_TOKEN"), env.get("OWNER_CHAT_ID")
     if not tok or not chat:
         return False
@@ -980,6 +987,8 @@ def daily(dry=False, skip_crawl=False, full=False, theme=None):
     if nw:
         try: news_items, _ = nw.fresh(hours=30, mark=False)
         except Exception as e: log(f"новости: {type(e).__name__}: {e}")
+    import gate
+    news_items = gate.filter_items(news_items, log)        # 14.09.2026: реклама, повторы, строки без источника — не проходят
     ctx = daily_context(found)
     _save_json(os.path.join(core.OUT, "daily_context.txt.json"), {"ts": core.msk().isoformat(), "text": ctx})
     now = core.msk()
@@ -1003,6 +1012,9 @@ def daily(dry=False, skip_crawl=False, full=False, theme=None):
     dtext = digest.build(chs, news_items, quotes, polished, n_pages, n_banks_pub, streak,
                          now.strftime("%d.%m.%Y"))
     dtext = publish.tidy(style.autofix(dtext))
+    dtext, _gate_dropped = gate.vet(dtext, log)            # шлюз публикации: последняя проверка перед каналом и сайтом
+    if _gate_dropped:
+        log("шлюз: снято строк " + str(len(_gate_dropped)))
     if digest.REJECTED:
         log("сводка, проверка чисел: отвергнуто строк модели " + str(len(digest.REJECTED)) + ": " + "; ".join(digest.REJECTED))
     _dig_issues = digest.check(dtext, chs, news_items)
@@ -1025,6 +1037,7 @@ def daily(dry=False, skip_crawl=False, full=False, theme=None):
             print("\n" + "=" * 70 + "\nСВОДКА (%d зн.):\n" % len(t) + t); return
         try:
             publish.post_brief(t, "", None, mode="photo")
+            gate.remember(t)                                  # ключи опубликованных строк — чтобы не повторить
             if nw and hasattr(nw, "mark_seen"): nw.mark_seen(news_items)
             titles.append({"date": now.strftime("%Y-%m-%d"), "title": "сводка", "rubric": "сводка"})
             _save_json(DAILY_TITLES, titles[-30:])

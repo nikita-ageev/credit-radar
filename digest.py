@@ -187,7 +187,9 @@ def key_rate_line(news_items, fetch=True):
     """Строка про ключевую ставку: только когда ставка изменилась или в ДЕНЬ решения (свежая, не повторная новость).
     13.09.2026 повторная новость о решении 11.09 дала строку второй день подряд — Никита: «так не надо»."""
     fresh = [x for x in (news_items or []) if not x.get("repeat")]
-    trig = any(_KR_TRIG.search(x.get("title", "") + " " + x.get("desc", "")) for x in fresh)
+    # 14.09.2026: триггер — только релиз самого Банка России о ставке; чужая новость «после решения ЦБ» строку не даёт.
+    # Повтор той же ставки в другой день режет gate.py (ключ kr:<ставка>).
+    trig = any(x.get("src") == "Банк России" and _KR_TRIG.search(x.get("title", "") + " " + x.get("desc", "")) for x in fresh)
     prev, cur = key_rate(fetch)
     if not cur or not cur.get("rate"):
         return ""
@@ -227,7 +229,7 @@ def dedupe_news(items):
                 continue
             j = len(tx & ty) / max(1, len(tx | ty))
             cont = len(tx & ty) / max(1, min(len(tx), len(ty)))
-            if j >= 0.5 or (cont >= 0.6 and min(len(tx), len(ty)) >= 4):
+            if j >= 0.5 or (cont >= 0.5 and min(len(tx), len(ty)) >= 5):   # 14.09: «банки не планируют менять ставки» ×2 — одно событие
                 # 13.09.2026: одно событие — ссылка на ПЕРВОИСТОЧНИК (БКИ/ЦБ > пресса > канал), канал остаётся как «через»
                 if source_rank(x) > source_rank(y):
                     keep_src, keep_toks = y["src"], y["_toks"]
@@ -241,6 +243,45 @@ def dedupe_news(items):
     for y in out:
         y.pop("_toks", None)
     return out
+
+
+def dedupe_by_model(items):
+    """Второй проход дедупликации (14.09.2026): модель группирует заголовки одного события, код оставляет
+    первоисточник (БКИ/ЦБ > пресса > канал) и дописывает «(также …)». Ошибка модели — список без изменений."""
+    if not items:
+        return items
+    try:
+        import gate
+        anchors = gate.published_titles(7)
+    except Exception:
+        anchors = []
+    if len(items) + len(anchors) < 2:
+        return items
+    try:
+        import brain
+        groups = brain.same_events([x.get("title", "") for x in items] + anchors)
+    except Exception:
+        groups = []
+    if not groups:
+        return items
+    n = len(items); drop = set(); out = list(items)
+    for g in groups:
+        if any(i >= n for i in g):                     # событие уже выходило в канале — все свежие из группы снимаем
+            for i in g:
+                if i < n:
+                    drop.add(i); REJECTED.append(f"уже публиковалось (другими словами): «{items[i].get('title', '')[:50]}»")
+            continue
+        g = [i for i in g if i < n and i not in drop]
+        if len(g) < 2:
+            continue
+        best = max(g, key=lambda i: (source_rank(items[i]), -i))
+        for i in g:
+            if i == best:
+                continue
+            if items[i]["src"] not in out[best]["src"]:
+                out[best] = dict(out[best], src=out[best]["src"] + f" (также {items[i]['src']})")
+            drop.add(i)
+    return [x for i, x in enumerate(out) if i not in drop]
 
 
 def trigger(chs):
@@ -326,6 +367,7 @@ def build(chs, news_items, quotes, polished=None, n_pages=0, n_banks=0, streak=0
     parts = [f"<b>Сводка за {date_str}</b>" if date_str else "<b>Сводка дня</b>"]
 
     fresh = dedupe_news([x for x in (news_items or []) if not x.get("repeat")])
+    fresh = dedupe_by_model(fresh)
     cbr_news = [x for x in fresh if x.get("src") == "Банк России"][:3]
     other_news = [x for x in fresh if x.get("src") != "Банк России"]
 
@@ -400,7 +442,19 @@ def build(chs, news_items, quotes, polished=None, n_pages=0, n_banks=0, streak=0
                      f"у {n_banks} {_pl(n_banks, 'банка', 'банков', 'банков')}"
                      + (f", {streak}-й день подряд без изменений." if streak >= 2 else "."))
 
-    other_news = [x for x in other_news if not (main_skip and main_skip[0] == "news" and x.get("title") == main_skip[1])][:3]
+    other_news = [x for x in other_news if not (main_skip and main_skip[0] == "news" and x.get("title") == main_skip[1])]
+    # 14.09.2026: пост канала без «что значит» от модели или без факта (числа / названия банка, ЦБ, БКИ) в заголовке —
+    # это мнение или тизер, не новость; в сводку не идёт (в вечернем выпуске то же правило — «нет добавочной информации»)
+    _FACT = re.compile(r"\d|Сбер|ВТБ|Т-Банк|Тинькофф|Альфа|Газпромбанк|Совкомбанк|МТС|Озон|Ozon|Яндекс|Wildberries|ОТП|Ренессанс|"
+                       r"Уралсиб|Райффайзен|ПСБ|Почта|Хоум|Банк России|ЦБ|НБКИ|ОКБ|Скоринг|Минфин|правительств|Госдум|ФАС", re.I)
+    def _keep_news(x):
+        if source_rank(x) >= 2:
+            return True
+        return bool(pol_news.get(x.get("title", ""), "").strip()) and bool(_FACT.search(x.get("title", "")))
+    for x in other_news:
+        if not _keep_news(x):
+            REJECTED.append(f"канал без факта/смысла: «{x.get('title', '')[:50]}»")
+    other_news = [x for x in other_news if _keep_news(x)][:3]
     if other_news:
         parts.append("<b>Новости</b>\n" + "\n".join(_news_line(x) for x in other_news))
     else:
