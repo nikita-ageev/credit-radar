@@ -23,7 +23,7 @@ ART_DIR = os.path.join(core.STATE, "articles")
 EVAL_DIR = os.path.join(core.HERE, "evals", "days")
 BUDGET_USD = float(os.environ.get("RADAR_EVENING_BUDGET", "0.8") or 0.8)
 MAX_ITEMS = 6
-FORBIDDEN = re.compile(r"конкурент|витрин|Озон Банк|Ozon Bank", re.I)
+FORBIDDEN = re.compile(r"конкурент|витрин|свой банк (own)|Ozon Bank", re.I)
 
 def log(msg):
     try:
@@ -177,7 +177,9 @@ def run(dry=False, redo=False, hours=14):
     news_items, errs = news.fresh(hours=hours, mark=False)
     if errs:
         log("вечер: источники с ошибками: " + "; ".join(errs))
+    import gate
     fresh = [x for x in news_items if redo or not x.get("repeat")]
+    fresh = gate.filter_items(fresh, log)                  # 14.09.2026: реклама, повторы, без источника — не проходят
     fresh = digest.dedupe_news(fresh)
     fresh.sort(key=lambda x: (-digest.source_rank(x), -(x["dt"].timestamp() if x.get("dt") else 0)))
     fresh = fresh[:MAX_ITEMS + 4]
@@ -226,6 +228,10 @@ def run(dry=False, redo=False, hours=14):
     total = len(lines) + len(dropped_items)
     text = build_text(lines, date_str) if lines else ""
     text = publish.tidy(style.autofix(text)) if text else ""
+    if text:
+        text, _gd = gate.vet(text, log)                     # шлюз публикации: последняя проверка перед каналом и сайтом
+        if _gd: log("вечер, шлюз: снято строк " + str(len(_gd)))
+        if text.count("•") == 0: lines = []
     if len(text) > publish.MSG_LIMIT:
         text = text[:publish.MSG_LIMIT - 1].rsplit("\n", 1)[0] + "…"
     cost = brain.spent(days=1) - spent0
@@ -255,6 +261,7 @@ def run(dry=False, redo=False, hours=14):
         else:
             publish.post_brief(text, "", None, mode="photo")
             log(f"вечер: выпуск опубликован, строк {len(lines)}")
+        gate.remember(text)
         news.mark_seen(news_items)
     except Exception as e:
         log(f"вечер: выпуск не ушёл: {type(e).__name__}: {e}"); _notify(f"Радар: вечерний выпуск не ушёл ({e})."); return None

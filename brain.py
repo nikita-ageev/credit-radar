@@ -532,3 +532,22 @@ def digest_polish(chs, news_items, model=None):
     return _with_model(model or os.environ.get("RADAR_DIGEST_MODEL", "claude-sonnet-5"),
                        lambda: _json_out(ask("\n".join(body), system=DIGEST_SYS, max_tokens=3000,
                                              timeout=120, what="digest_polish")))
+
+def same_events(titles):
+    """14.09.2026: одно событие в разных словах («банки взяли паузу в ставках» / «банки не планируют менять ставки»)
+    токены не ловят. Модель группирует заголовки; ответ — список групп индексов. Код решает, кого оставить (первоисточник).
+    При любой ошибке — пустой список (ничего не сливаем)."""
+    if len(titles) < 2:
+        return []
+    lst = "\n".join(f"{i}. {t}" for i, t in enumerate(titles))
+    try:
+        raw = ask("Ниже заголовки новостей за день. Сгруппируй те, что описывают ОДНО И ТО ЖЕ событие (одно решение, одна "
+                  "статистика, одно заявление), даже если слова разные. Разные события про одну тему — не группировать. "
+                  "Ответ строго JSON: {\"groups\": [[0, 2], [1, 3]]} — только группы из двух и более; если таких нет — "
+                  "{\"groups\": []}.\n\n" + lst,
+                  system="Ты редактор новостной ленты. Отвечаешь только JSON.", max_tokens=300, timeout=60, what="same_events")
+        d = _json_out(raw) or {}
+        groups = [[int(i) for i in g if 0 <= int(i) < len(titles)] for g in d.get("groups", []) if isinstance(g, list)]
+        return [g for g in groups if len(g) >= 2]
+    except Exception:
+        return []

@@ -268,8 +268,11 @@ def render_issue(iss, prev_iss=None, next_iss=None):
     essay = iss.get("essay")
     image = f"{url}chart.png" if essay and essay.get("chart") else f"{BASE}{SECTION}/og.png?v=2"
     digest_html, _, _ = digest_to_html(iss.get("digest", ""))
-    title_page = f"{iss['title']} — Кредитный радар, {date_short(d)}"
-    head = HEAD.format(title=_html.escape(title_page, quote=True), desc=_html.escape(iss["summary"], quote=True), url=url,
+    # заголовок и описание — под поисковые запросы «условия кредитных карт / кредитов банков», не только под канал
+    title_page = f"Кредитные карты и кредиты банков, {date_short(d)} — {clip(iss['title'], 70).rstrip('.')} — Кредитный радар"
+    desc_page = clip("Изменения условий кредитных карт, рассрочки, кредитов наличными и автокредитов у 12 банков России за день. "
+                     + iss["summary"], 300)
+    head = HEAD.format(title=_html.escape(title_page, quote=True), desc=_html.escape(desc_page, quote=True), url=url,
                        ogtype="article", image=image, base=BASE, section=SECTION, css=CSS,
                        jsonld=_jsonld_issue(iss, url, image), cur_radar="cur", cur_arch="")
     body = [head, '<div class="wrap">', '<header class="issue">',
