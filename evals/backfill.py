@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Разовое заполнение evals/days из того, что уже лежит в out/ (12.09) и в dry-логах (11.09).
-Дальше снимки пишет сам radar.daily. Запуск из <RADAR_DIR>: python3 evals/backfill.py"""
+Дальше снимки пишет сам radar.daily. Запуск из /root/radar: python3 evals/backfill.py"""
 import os, sys, re, json
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, ROOT); os.chdir(ROOT)
 DAYS = os.path.join(ROOT, "evals", "days"); os.makedirs(DAYS, exist_ok=True)

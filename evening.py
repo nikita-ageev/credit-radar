@@ -156,13 +156,25 @@ def render_line(item, facts, why, main=False):
     tail = (facts[0] if facts else why)
     return "• " + head + (" — " + tail + "." if tail else ".")
 
+def importance(it, facts, why):
+    """15.09.2026: важность = вес темы для P&L розничного кредитора × (первоисточник) × (есть ли что сказать).
+    POS-кредиты или эскроу не могут быть «Главным» только потому, что релиз выпустило БКИ или ЦБ."""
+    w = digest.npv_weight(it)
+    src = 1.0 + 0.15 * (digest.source_rank(it) - 1)          # 1.0 канал, 1.15 пресса, 1.3 первоисточник
+    info = 1.0 + 0.5 * min(len(facts), 2) + (0.3 if why else 0.0)
+    return w * src * info
+
 def build_text(lines, date_str):
-    """Порядок — по важности (первоисточник, число фактов), не по времени. Первое читают все, пятое — единицы."""
-    ranked = sorted(lines, key=lambda t: (-digest.source_rank(t[0]), -len(t[2]), -(1 if t[3] else 0)))
+    """Порядок — по важности для розничного кредитора (вес темы × источник × факты), не по времени и не по типу источника.
+    «Главное» — только строка с весом темы ≥ 0.5 и хотя бы одним фактом или «что значит»; иначе выпуск без «Главного»."""
+    ranked = sorted(lines, key=lambda t: -importance(t[0], t[2], t[3]))
     parts = [f"<b>Вечерний выпуск за {date_str}</b>"]
     it, line, facts, why = ranked[0]
-    parts.append(render_line(it, facts, why, main=True))
-    rest = ranked[1:1 + MAX_REST]
+    if digest.npv_weight(it) >= 0.5 and (facts or why):
+        parts.append(render_line(it, facts, why, main=True))
+        rest = ranked[1:1 + MAX_REST]
+    else:
+        rest = ranked[:1 + MAX_REST]
     if rest:
         parts.append("<b>Ещё за день</b>\n" + "\n".join(render_line(i, f, w) for i, _l, f, w in rest))
     parts.append("<i>Факты «внутри» — из текста первоисточника, проверены кодом и вторым проверяющим.</i>")
@@ -181,7 +193,8 @@ def run(dry=False, redo=False, hours=14):
     fresh = [x for x in news_items if redo or not x.get("repeat")]
     fresh = gate.filter_items(fresh, log)                  # 14.09.2026: реклама, повторы, без источника — не проходят
     fresh = digest.dedupe_news(fresh)
-    fresh.sort(key=lambda x: (-digest.source_rank(x), -(x["dt"].timestamp() if x.get("dt") else 0)))
+    # 15.09.2026: сначала темы с большим весом для розничного кредита (КК, КН, рассрочка, ставка, МПЛ), потом первоисточник, потом свежесть
+    fresh.sort(key=lambda x: (-digest.npv_weight(x), -digest.source_rank(x), -(x["dt"].timestamp() if x.get("dt") else 0)))
     fresh = fresh[:MAX_ITEMS + 4]
     if not fresh:
         log("вечер: свежих новостей нет, выпуск пропущен"); return None
@@ -202,8 +215,9 @@ def run(dry=False, redo=False, hours=14):
         rec["code_dropped"] = dropped
         if not it.get("link") or not link_alive(it["link"]):
             rec["gate"] = "ссылка не отвечает"; dropped_items.append(rec); snapshot["items"].append(rec); continue
-        # каналы без фактов и без «что значит» — не про розничный кредит
-        if not facts and not why and digest.source_rank(it) < 3:
+        # 15.09.2026: строка без факта и без «что значит» — это голая ссылка; её неудобно читать (ссылки открывают не всегда),
+        # и она ничего не добавляет. Не проходит ни для каналов, ни для БКИ/ЦБ.
+        if not facts and not why:
             rec["gate"] = "нет добавочной информации"; dropped_items.append(rec); snapshot["items"].append(rec); continue
         line = render_line(it, facts, why)
         verdict = judge(_plain(line), text, it.get('link', '')); judged += 1

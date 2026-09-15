@@ -9,7 +9,7 @@
   python3 evals/run.py show results/X.jsonl [--fails]
   python3 evals/run.py compare results/A.jsonl results/B.jsonl
 
-Запускать из <RADAR_DIR> (импортирует digest, style, brain, publish, radar как есть).
+Запускать из /root/radar (импортирует digest, style, brain, publish, radar как есть).
 Снимок дня пишет radar.daily → evals/days/ГГГГ-ММ-ДД.json: chs, news, quotes, ctx, digest, essay.
 """
 import os, sys, re, json, argparse, urllib.request
