@@ -7,7 +7,7 @@
 Фильтр — по ключевым словам розничного кредитного риска (МПЛ, ПСК, ключевая ставка,
 ПДН, надбавки, резервы, МФО, БКИ, рассрочка …). Шум (ломбардный список, обеспечение,
 монеты, технические работы) отсекается явно. Новые совпадения шлются в личный чат
-через отдельный бот-уведомитель (owner.env). Состояние: state/cbr_news_seen.json.
+через токен Джарвиса (/opt/jarvis/advisor.env). Состояние: state/cbr_news_seen.json.
 
 Запуск:  python cbr_news.py          — проверить и отправить новое (крон 2 раза в день: 09:30 и 19:30 МСК)
          python cbr_news.py --init   — пометить текущую ленту прочитанной, ничего не слать
@@ -22,7 +22,7 @@ import core   # свой CA-бандл (certs/bundle.pem), паузы, robots.tx
 
 HERE   = os.path.dirname(os.path.abspath(__file__))
 STATE  = os.path.join(HERE, "state", "cbr_news_seen.json")
-ENV    = os.environ.get("RADAR_OWNER_ENV", "owner.env")   # TG_BOT_TOKEN, OWNER_CHAT_ID
+ENV    = "/opt/jarvis/advisor.env"
 FEEDS  = [("Пресс-релиз", "https://www.cbr.ru/rss/RssPress"),
           ("На сайте ЦБ", "https://www.cbr.ru/rss/RssNews")]
 
