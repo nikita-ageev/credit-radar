@@ -9,7 +9,7 @@
       → шлюз 1, код: числа фактов есть в тексте статьи; ссылки отвечают; нет запрещённых слов
       → шлюз 2, судья Opus (другая модель), да/нет по пунктам на каждую строку
       → одна ревизия по замечаниям судьи, повторный судья
-      → шлюз 3, код: осталось ≥ 1 строки и ≤ 40 % отброшено, лимит бюджета
+      → шлюз 3, код: осталось ≥ 2 проверенных строк (одна — только если отброшено ≤ 60 %), нет запрещённых слов
       → публикация в канал и на сайт, отметка «показано», снимок для evals
 Если шлюз не пройден — выпуск не выходит, черновик и причины уходят владельцу.
 
@@ -18,19 +18,13 @@
 """
 import os, re, json, time, hashlib, urllib.request
 import core, brain, digest, publish, style
+from radarlog import log                       # 17.09.2026: общий журнал вместо ленивого импорта radar
 
 ART_DIR = os.path.join(core.STATE, "articles")
 EVAL_DIR = os.path.join(core.HERE, "evals", "days")
 BUDGET_USD = float(os.environ.get("RADAR_EVENING_BUDGET", "0.8") or 0.8)
 MAX_ITEMS = 6
 FORBIDDEN = re.compile(r"конкурент|витрин|свой банк (own)|Ozon Bank", re.I)
-
-def log(msg):
-    try:
-        import radar; radar.log(msg)
-    except Exception:
-        print(msg)
-
 
 # ---------------- 1. текст статьи ----------------
 def article_text(url, max_chars=7000):
@@ -190,6 +184,9 @@ def run(dry=False, redo=False, hours=14):
     if errs:
         log("вечер: источники с ошибками: " + "; ".join(errs))
     import gate
+    if redo:
+        # переделываем сегодняшний выпуск: строки, запомненные шлюзом после 15:00 МСК сегодня, — это он сам, не «уже публиковалось»
+        gate.IGNORE_SINCE[0] = now.replace(hour=15, minute=0, second=0, microsecond=0).timestamp()
     fresh = [x for x in news_items if redo or not x.get("repeat")]
     fresh = gate.filter_items(fresh, log)                  # 14.09.2026: реклама, повторы, без источника — не проходят
     fresh = digest.dedupe_news(fresh)
@@ -198,7 +195,7 @@ def run(dry=False, redo=False, hours=14):
     fresh = fresh[:MAX_ITEMS + 4]
     if not fresh:
         log("вечер: свежих новостей нет, выпуск пропущен"); return None
-    snapshot = {"date": date, "ts": now.isoformat(), "input": [{k: (v.isoformat() if hasattr(v, "isoformat") else v) for k, v in x.items()} for x in fresh], "items": []}
+    snapshot = {"date": date, "ts": now.isoformat(), "version": _version(), "input": [{k: (v.isoformat() if hasattr(v, "isoformat") else v) for k, v in x.items()} for x in fresh], "items": []}
     lines, dropped_items, judged = [], [], 0
     for it in fresh:
         if brain.spent(days=1) - spent0 > BUDGET_USD:
@@ -241,20 +238,15 @@ def run(dry=False, redo=False, hours=14):
         if len(lines) >= MAX_ITEMS: break
     total = len(lines) + len(dropped_items)
     text = build_text(lines, date_str) if lines else ""
-    text = publish.tidy(style.autofix(text)) if text else ""
     if text:
-        text, _gd = gate.vet(text, log)                     # шлюз публикации: последняя проверка перед каналом и сайтом
+        text, _gd = gate.finalize(text, log)                # вёрстка → термины → шлюз: та же точка, что у утренней сводки
         if _gd: log("вечер, шлюз: снято строк " + str(len(_gd)))
         if text.count("•") == 0: lines = []
-    if len(text) > publish.MSG_LIMIT:
-        text = text[:publish.MSG_LIMIT - 1].rsplit("\n", 1)[0] + "…"
+    text = publish.fit(text)
     cost = brain.spent(days=1) - spent0
     snapshot.update({"text": text, "dropped": len(dropped_items), "kept": len(lines), "judged": judged, "cost_usd": round(cost, 3), "seconds": round(time.time() - t0)})
     # ---- шлюз 3: код ----
-    reasons = []
-    if not lines: reasons.append("ни одной строки не прошло проверки")
-    if total and len(dropped_items) / total > 0.6 and len(lines) < 3: reasons.append(f"отброшено {len(dropped_items)} из {total}")
-    if FORBIDDEN.search(_plain(text)): reasons.append("запрещённое слово в тексте")
+    reasons = gate3_reasons(len(lines), len(dropped_items), text)
     _save_snapshot(date, snapshot, dry)
     log(f"вечер: строк {len(lines)}, отброшено {len(dropped_items)}, судья вызван {judged} раз, {cost:.2f} $, {snapshot['seconds']} с")
     for r in dropped_items:
@@ -288,6 +280,21 @@ def run(dry=False, redo=False, hours=14):
     return text
 
 
+def gate3_reasons(n_lines, n_dropped, text):
+    """Шлюз 3 (код). Каждая оставшаяся строка уже прошла судью, поэтому доля отброшенных сама по себе не порок:
+    17.09.2026 выпуск с двумя проверенными строками не вышел из-за «отброшено 4 из 6». Правило: две проверенные
+    строки — выпуск выходит; одна строка при большинстве отброшенных — похоже на шум, не выходит; ноль — не выходит."""
+    reasons = []
+    total = n_lines + n_dropped
+    if not n_lines:
+        reasons.append("ни одной строки не прошло проверки")
+    elif n_lines == 1 and total and n_dropped / total > 0.6:
+        reasons.append(f"одна строка при отброшенных {n_dropped} из {total}")
+    if text and FORBIDDEN.search(_plain(text)):
+        reasons.append("запрещённое слово в тексте")
+    return reasons
+
+
 def _today_evening_msg_id():
     try:
         rows = json.load(open(publish.LEDGER, encoding="utf-8"))
@@ -296,6 +303,12 @@ def _today_evening_msg_id():
         return ids[-1] if ids else None
     except Exception:
         return None
+
+def _version():
+    try:
+        import version; return version.__version__
+    except Exception:
+        return ""
 
 def _save_snapshot(date, snap, dry):
     try:

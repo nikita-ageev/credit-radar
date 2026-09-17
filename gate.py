@@ -123,9 +123,13 @@ def _ttl(key):
     return None if key.startswith("kr:") else STOCK_TTL if key.startswith("stock:") else NEWS_TTL
 
 
+IGNORE_SINCE = [None]   # 15.09.2026: при переделке сегодняшнего выпуска (--redo) ключи, записанные после этого момента, — свои же, не повтор
+
 def already_published(key, now=None):
     d = _load(); ts = d.get(key)
     if ts is None or isinstance(ts, dict):
+        return False
+    if IGNORE_SINCE[0] is not None and ts >= IGNORE_SINCE[0]:
         return False
     ttl = _ttl(key)
     return ttl is None or (now or time.time()) - ts < ttl
@@ -154,6 +158,19 @@ def filter_items(items, log=None):
 _BULLET_SECTIONS = ("Банк России", "Новости", "Акции", "Главное", "Ещё за день")
 
 
+_WAS_BECAME = re.compile(r"было «([^»]*)», стало «([^»]*)»")
+
+
+def same_was_became(plain):
+    """True, если в строке «было „X“, стало „Y“» X и Y совпадают (после обрезки многоточий, пробелов и знаков).
+    Такая строка — пустая для читателя, публиковать её нельзя."""
+    m = _WAS_BECAME.search(plain or "")
+    if not m:
+        return False
+    norm = lambda t: re.sub(r"[\s…«»\"'.,;:—–\-]+", " ", t).strip().lower()
+    return norm(m.group(1)) == norm(m.group(2))
+
+
 def vet(text, log=None):
     """Финальная проверка собранного HTML перед публикацией. Возвращает (текст, список снятых строк с причинами).
     Строки по банкам («Условия у банков») не трогаем: их источники — страницы условий, проверяются в digest.check."""
@@ -169,7 +186,9 @@ def vet(text, log=None):
         lines = b.split("\n")
         keep = []
         for i, ln in enumerate(lines):
-            is_bullet = ln.lstrip().startswith("•") or is_main
+            # 16.09.2026: в блоке «Главное» проверяем ссылкой только первую строку (заголовок-ссылка);
+            # строки «— факт» и «Что значит:» — продолжение той же новости, у них своей ссылки нет и быть не должно
+            is_bullet = ln.lstrip().startswith("•") or (is_main and i == 0)
             if i == 0 and not is_main:
                 keep.append(ln); continue
             if not is_bullet:
@@ -177,7 +196,9 @@ def vet(text, log=None):
             reason = None
             hrefs = re.findall(r'href="([^"]+)"', ln)
             plain = _html.unescape(_STRIP.sub("", ln))
-            if not hrefs or not any(valid_source(_html.unescape(h)) for h in hrefs):
+            if same_was_became(plain):
+                reason = "«было» и «стало» совпадают"   # 16.09.2026, Альфа: разница осталась за многоточием
+            elif not hrefs or not any(valid_source(_html.unescape(h)) for h in hrefs):
                 reason = "нет ссылки на источник"
             else:
                 for h in hrefs:
@@ -194,8 +215,8 @@ def vet(text, log=None):
             else:
                 keep.append(ln)
         if is_main:
-            if len(keep) == 0 or not keep[0].strip():
-                continue
+            if len(keep) == 0 or not keep[0].strip() or not keep[0].lstrip().startswith("<b>Главное"):
+                continue                                     # заголовок «Главного» снят — уходит весь блок, хвосты без него не нужны
             out_blocks.append("\n".join(keep)); continue
         if len(keep) <= 1:                                   # остался только заголовок раздела
             if sec == "Новости":
@@ -203,6 +224,16 @@ def vet(text, log=None):
             continue
         out_blocks.append("\n".join(keep))
     return "\n\n".join(out_blocks), dropped
+
+
+def finalize(text, log=None):
+    """Единая точка перед каналом и сайтом (17.09.2026): вёрстка под Telegram (publish.tidy) → безопасные автозамены
+    терминов (style.autofix) → шлюз (vet). Раньше те же три шага были расписаны отдельно в утренней сводке и в вечернем
+    выпуске; теперь порядок и состав один, и его проверяет evals/publish_test.py. Возвращает (текст, снятые строки)."""
+    import publish, style
+    if not text:
+        return "", []
+    return vet(publish.tidy(style.autofix(text)), log)
 
 
 def published_titles(days=7):

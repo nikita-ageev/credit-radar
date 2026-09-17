@@ -17,6 +17,7 @@
   radar.py collect    снять замеры отзывов и широких сигналов (медленно, раз в сутки)
   radar.py context    показать контекст, который уходит аналитику (--refresh — пересобрать)
   radar.py prune      экономная чистка архива (сырые копии старше 14 дней)
+  radar.py version    версия кода (VERSION + sha коммита)
 
 Всё состояние — локально в state/, готовые посты и картинки — в out/.
 Источники только открытые. Внутренних данных банка здесь нет и быть не должно.
@@ -25,9 +26,8 @@ import os, re, sys, json, time, traceback
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import core, sources, brain, publish, charts
-
-LOG = os.path.join(HERE, "radar_log.txt")
+import core, sources, brain, publish, charts, version
+from radarlog import log, LOG      # 17.09.2026: общий журнал, без цикла radar↔evening
 FINDINGS = os.path.join(core.STATE, "findings.json")
 
 # Модули, которые собираются отдельно; радар работает и без них.
@@ -37,15 +37,6 @@ def _opt(name):
     except Exception as e:
         log(f"модуль {name} недоступен: {type(e).__name__}: {str(e)[:80]}")
         return None
-
-def log(msg):
-    line = f"{core.msk():%Y-%m-%d %H:%M:%S} МСК  {msg}"
-    print(line, flush=True)
-    try:
-        with open(LOG, "a", encoding="utf-8") as f:
-            f.write(line + "\n")
-    except Exception:
-        pass
 
 # ---------------- обход источников ----------------
 def _lines(t):
@@ -700,7 +691,8 @@ def _eval_snapshot(date, **kw):
     try:
         os.makedirs(EVAL_DAYS, exist_ok=True)
         p = os.path.join(EVAL_DAYS, date + ".json")
-        d = _load_json(p, {"date": date}); d.update({k: v for k, v in kw.items() if v is not None}); _save_json(p, d)
+        d = _load_json(p, {"date": date}); d.update({k: v for k, v in kw.items() if v is not None})
+        d["version"] = version.__version__; _save_json(p, d)
     except Exception as e:
         log(f"снимок для evals не записан: {type(e).__name__}: {e}")
 
@@ -908,9 +900,8 @@ def _significant(found):
     return bool(reasons), reasons, cosmetic, news_hits
 
 def _essays_this_week(titles):
-    import datetime as _dt
-    week_ago = (core.msk().date() - _dt.timedelta(days=7)).isoformat()
-    return sum(1 for t in titles if t.get("date", "") >= week_ago and t.get("rubric") not in ("тихий день", "сводка"))
+    import digest
+    return digest.essays_this_week(titles, core.msk().date())
 
 def quiet_text(found, cosmetic, news_hits):
     """Короткий пост «значимых изменений нет» — собирается из данных обхода, модель не вызывается."""
@@ -964,6 +955,7 @@ def budget_guard():
 def evening(dry=False, redo=False):
     """Вечерний выпуск — конвейер в evening.py (первоисточники, факты из статей, проверки кодом, судья, шлюзы)."""
     import evening as ev
+    log(version.banner() + ": вечерний выпуск")
     return ev.run(dry=dry, redo=redo)
 
 def daily(dry=False, skip_crawl=False, full=False, theme=None):
@@ -974,6 +966,7 @@ def daily(dry=False, skip_crawl=False, full=False, theme=None):
        не чаще RADAR_ESSAY_MAX_WEEK в неделю, короткий, с проверкой стиля и фактов.
     --theme / --full принудительно запускают разбор."""
     import digest, style
+    log(version.banner() + ": ежедневный выпуск")
     if os.environ.get("RADAR_PRIVATE") == "1" and not dry:
         # приватный режим (ручные копии тарифов, часть закрыта robots.txt): в канал не публикуем никогда
         log("RADAR_PRIVATE=1: публикация в канал отключена, работаем как --dry"); dry = True
@@ -996,6 +989,8 @@ def daily(dry=False, skip_crawl=False, full=False, theme=None):
 
     # ---- 1. сводка дня ----
     chs = digest.changes(found)
+    for r in digest.CHANGE_REJECTS:
+        log(f"изменения: отброшено — {r}")
     sg = _opt("signals"); quotes = None
     if sg:
         try: quotes = sg.load_prev("quotes")
@@ -1011,8 +1006,7 @@ def daily(dry=False, skip_crawl=False, full=False, theme=None):
     n_pages, n_banks_pub = _public_counts()
     dtext = digest.build(chs, news_items, quotes, polished, n_pages, n_banks_pub, streak,
                          now.strftime("%d.%m.%Y"))
-    dtext = publish.tidy(style.autofix(dtext))
-    dtext, _gate_dropped = gate.vet(dtext, log)            # шлюз публикации: последняя проверка перед каналом и сайтом
+    dtext, _gate_dropped = gate.finalize(dtext, log)      # вёрстка → термины → шлюз: одна точка перед каналом и сайтом
     if _gate_dropped:
         log("шлюз: снято строк " + str(len(_gate_dropped)))
     if digest.REJECTED:
@@ -1021,8 +1015,7 @@ def daily(dry=False, skip_crawl=False, full=False, theme=None):
     if _dig_issues:
         log("сводка, самопроверка: " + "; ".join(_dig_issues))
         _notify_owner("Радар, сводка: самопроверка нашла проблемы, проверь пост после выхода: " + "; ".join(_dig_issues))
-    if len(dtext) > publish.MSG_LIMIT:
-        dtext = dtext[:publish.MSG_LIMIT - 1].rsplit("\n", 1)[0] + "…"
+    dtext = publish.fit(dtext)
     _save_json(os.path.join(core.OUT, "digest_draft.json"), {"ts": now.isoformat(), "text": dtext, "changes": chs})
     _eval_snapshot(now.strftime("%Y-%m-%d"), chs=chs, news=news_items, quotes=quotes, ctx=ctx, digest=dtext,
                    n_pages=n_pages, n_banks=n_banks_pub, streak=streak)
@@ -1229,6 +1222,8 @@ def prune():
 def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "help"
     dry = "--dry" in sys.argv
+    if cmd == "version":
+        print(version.banner()); sys.exit(0)
     if cmd == "evening":
         evening(dry=dry, redo="--redo" in sys.argv); sys.exit(0)
     try:

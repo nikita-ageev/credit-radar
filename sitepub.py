@@ -186,6 +186,11 @@ footer{font-size:13px;color:var(--ink3);margin:54px 0 40px;line-height:1.6}
 @media (max-width:640px){.topnav .wrap{gap:14px;font-size:13px}.topnav a.brand{white-space:nowrap;flex:none}.topnav .wrap>span{display:flex;gap:14px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;-ms-overflow-style:none;max-width:70vw;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);padding-right:24px}.topnav .wrap>span::-webkit-scrollbar{display:none}.topnav .wrap>span a{margin-left:0;flex:none}.arch .row{grid-template-columns:1fr;gap:4px}header.issue{padding:44px 0 26px}}
 """
 
+try:
+    import version as _v; _VER = _v.VERSION
+except Exception:
+    _VER = ""
+
 HEAD = """<!doctype html>
 <html lang="ru">
 <head>
@@ -239,11 +244,11 @@ HEAD = """<!doctype html>
 """
 
 FOOT = """
-<footer class="wrap">Кредитный радар · автоматический мониторинг условий розничного кредитования у 12 банков · данные с сайтов банков, ссылка на источник в каждой строке · <a href="/credit-radar/">о проекте</a> · <a href="/">Никита Агеев</a></footer>
+<footer class="wrap">Кредитный радар · автоматический мониторинг условий розничного кредитования у 12 банков · данные с сайтов банков, ссылка на источник в каждой строке · <a href="/credit-radar/">о проекте</a> · <a href="/">Никита Агеев</a> · <span class="ver">Радар v{ver}</span></footer>
 </div>
 </body>
 </html>
-"""
+""".replace("{ver}", _VER)
 
 def _jsonld_issue(iss, url, image):
     d = iss["date"]

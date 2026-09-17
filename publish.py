@@ -254,6 +254,14 @@ def upload_public(path, title="Кредитный радар", desc=""):
     if ok_img: return img_url
     return None
 
+def fit(text, limit=None):
+    """Уложить текст в лимит сообщения по границе строки с многоточием (17.09.2026: одна реализация вместо двух).
+    Обрезка на полуслове = оборванный пост в канале (11.09), поэтому режем только по переводу строки."""
+    limit = limit or MSG_LIMIT
+    if not text or len(text) <= limit:
+        return text
+    return text[:limit - 1].rsplit("\n", 1)[0].rstrip() + "…"
+
 def tidy(text):
     """Косметика вёрстки под Telegram: «/0,1%» Telegram красит как команду «/0» —
     раздвигаем слэш; три и более пустых строк — в одну; пробелы у краёв строк.

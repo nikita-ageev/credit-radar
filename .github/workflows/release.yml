@@ -1,0 +1,29 @@
+name: release
+
+# После merge в main: если тега v<VERSION> ещё нет — поставить его на этот коммит. Версия — файл VERSION,
+# содержание — CHANGELOG.md (проверка соответствия — в tests.yml, evals/version_test.py).
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Tag v$(cat VERSION) if missing
+        run: |
+          V="v$(cat VERSION | tr -d '[:space:]')"
+          if git ls-remote --tags origin "refs/tags/$V" | grep -q "$V"; then
+            echo "тег $V уже есть"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "$V" -m "Кредитный радар $V"
+          git push origin "$V"
+          echo "поставлен тег $V"
