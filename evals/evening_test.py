@@ -73,15 +73,14 @@ checks.append(("настоящее изменение ставки по одно
 _dep = [{"bank_key": "mts", "bank": "МТС-Банк", "product": "кредит наличными", "url": "u",
          "changes": ["-Вклад Специальный ставка до 19,9%", "+Вклад Специальный ставка до 20,0%"], "total": 2, "own": False}]
 checks.append(("строка про вклад не становится ставкой по кредиту", digest.changes(_dep) == []))
+# 17.09.2026: две проверенные строки — выпуск выходит, даже если отброшено 4 из 6; одна при большинстве отброшенных — нет; ноль — нет
+checks.append(("шлюз 3: две проверенные строки при 4 отброшенных — выходит", evening.gate3_reasons(2, 4, "• строка") == []))
+checks.append(("шлюз 3: три строки без отброшенных — выходит", evening.gate3_reasons(3, 0, "• строка") == []))
+checks.append(("шлюз 3: одна строка при 4 отброшенных — не выходит", any("одна строка" in r for r in evening.gate3_reasons(1, 4, "• строка"))))
+checks.append(("шлюз 3: одна строка при одной отброшенной — выходит", evening.gate3_reasons(1, 1, "• строка") == []))
+checks.append(("шлюз 3: ноль строк — не выходит", any("ни одной" in r for r in evening.gate3_reasons(0, 5, ""))))
 fails = [n for n, ok in checks if not ok]
 for n, ok in checks: print(("PASS " if ok else "FAIL ") + n)
 print("\nИТОГ:", "OK" if not fails else f"{len(fails)} FAIL")
 sys.exit(1 if fails else 0)
 
-# 17.09.2026: две проверенные строки — выпуск выходит, даже если отброшено 4 из 6; одна при большинстве отброшенных — нет; ноль — нет
-assert evening.gate3_reasons(2, 4, "• строка") == [], evening.gate3_reasons(2, 4, "• строка")
-assert evening.gate3_reasons(3, 0, "• строка") == []
-assert evening.gate3_reasons(1, 4, "• строка") and "одна строка" in evening.gate3_reasons(1, 4, "• строка")[0]
-assert evening.gate3_reasons(1, 1, "• строка") == []
-assert evening.gate3_reasons(0, 5, "") and "ни одной" in evening.gate3_reasons(0, 5, "")[0]
-print("gate3: OK")
