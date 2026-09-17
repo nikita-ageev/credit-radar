@@ -83,8 +83,63 @@ def _numunits(s):
     return out
 
 
+# 17.09.2026: МТС-Банк — «Ставка до 19,9% → до 20,0%» вышло как ставка по кредитной карте, наличным и автокредиту.
+# На деле это строка из общего меню сайта (вклад «МТС Специальный до 20,0%»), она есть на каждой странице банка.
+# Три защиты: (1) одно и то же изменение на ≥2 продуктах банка — общий элемент сайта, не условия продукта;
+# (2) рядом с изменённой строкой на странице — слова про вклады/накопительные счета — это не кредитная ставка;
+# (3) «ставка до X %» по кредиту ниже ключевой + 3 п.п. — неправдоподобно для кредита, в сводку не идёт.
+_DEPOSIT_CTX = re.compile(r"вклад|накопительн|сберегательн|депозит|кешбокс|кэшбокс|доходност|омс\b|металлическ", re.I)
+_CREDIT_CTX = re.compile(r"кредит|карт|заём|займ|рассрочк|псk|годовых по кредиту", re.I)
+_RATE_UPTO = re.compile(r"(?:ставк\w*\s+)?до\s+(\d{1,2}[,.]?\d?)\s*%", re.I)
+
+
+def _page_context(bank_key, product, line, span=220):
+    """Кусок текущего снимка страницы вокруг строки (для проверки, о чём она)."""
+    try:
+        import core
+        snap = core.load_snap(bank_key, product) or {}
+        text = snap.get("text") or ""
+        i = text.find(line.strip())
+        if i < 0:
+            return ""
+        return text[max(0, i - span): i + len(line) + span]
+    except Exception:
+        return ""
+
+
+def _key_rate_value():
+    try:
+        prev, cur = key_rate(fetch=False)
+        return float((cur or prev or {}).get("rate") or 0)
+    except Exception:
+        return 0.0
+
+
+def _not_credit_rate(c, ctx):
+    """Причина, по которой «ставка» в строке — не ставка по кредиту, либо None."""
+    line = (c.get("new") or c.get("old") or "")
+    if _DEPOSIT_CTX.search(line):
+        return "строка про вклад/накопительный счёт"
+    if ctx and _DEPOSIT_CTX.search(ctx) and not _CREDIT_CTX.search(ctx):
+        return "контекст на странице — вклады, не кредит"
+    kr = _key_rate_value()
+    m = _RATE_UPTO.search(line)
+    if kr and m and "от" not in line.lower():
+        try:
+            v = float(m.group(1).replace(",", "."))
+            if v < kr + 3:
+                return f"«до {m.group(1)}%» ниже ключевой {kr:g}% + 3 п.п. — не кредитная ставка"
+        except ValueError:
+            pass
+    return None
+
+
+CHANGE_REJECTS = []   # что отбросил changes() и почему; radar.daily пишет в лог
+
+
 def changes(found):
     """Значимые изменения условий у банков: параметр, старое → новое. Косметику и шум отбрасываем."""
+    CHANGE_REJECTS.clear()
     out = []; raw = {}
     for it in found:
         if it.get("own"):
@@ -102,9 +157,23 @@ def changes(found):
                 continue
             if not _nums(line) and "скидка/акция" not in params:
                 continue                                  # без чисел — почти всегда вёрстка
+            if params[0] in ("ставка", "ПСК"):
+                why = _not_credit_rate({"old": old, "new": new}, _page_context(it.get("bank_key", ""), it["product"], line))
+                if why:
+                    CHANGE_REJECTS.append(f"{it['bank']}/{it['product']}: «{_clip(line, 60)}» — {why}")
+                    continue
             out.append({"bank": it["bank"], "product": it["product"], "url": it["url"],
                         "param": params[0], "old": old, "new": new,
                         "kind": "изменение" if (old and new) else ("появилось" if new else "исчезло")})
+    # общий элемент сайта: одно и то же изменение на разных продуктах одного банка (меню, шапка, подвал)
+    same = {}
+    for c in out:
+        same.setdefault((c["bank"], c["param"], _norm(c["old"]), _norm(c["new"])), set()).add(c["product"])
+    shared = {k for k, v in same.items() if len(v) >= 2}
+    if shared:
+        for k in shared:
+            CHANGE_REJECTS.append(f"{k[0]}: «{_clip(k[3] or k[2], 50)}» одинаково на {len(same[k])} продуктах — общий элемент сайта, не условия")
+        out = [c for c in out if (c["bank"], c["param"], _norm(c["old"]), _norm(c["new"])) not in shared]
     # один банк/продукт — не больше трёх строк, самые «ценовые» вперёд
     order = ["ставка", "ПСК", "льготный период", "минимальный платёж", "комиссия", "лимит", "срок", "скидка/акция"]
     out.sort(key=lambda c: order.index(c["param"]) if c["param"] in order else 9)
@@ -124,6 +193,50 @@ def changes(found):
     return res
 
 
+def _norm_txt(s):
+    return re.sub(r"[\s«»\"'.,;:—–\-]+", " ", (s or "")).strip().lower()
+
+
+def diff_fragment(old, new, n=110):
+    """16.09.2026: Альфа, льготный период — «было „Если в ДК указаны БП 60 дней…“, стало „Если в ДК указаны БП 60 дней…“»:
+    обе строки обрезаны до общего начала, разница осталась за многоточием. Показываем ТОЛЬКО то, что изменилось:
+    срезаем общее начало и общий конец по границам слов, оставляем 2 слова контекста. Возвращает (kind, old_frag, new_frag):
+    kind — «убрано» (новое = начало старого), «добавлено» (старое = начало нового), «изменение» или None (текст тот же)."""
+    o, w = (old or "").strip(), (new or "").strip()
+    if _norm_txt(o) == _norm_txt(w):
+        return None, "", ""
+    ow, nw = o.split(), w.split()
+    _k = lambda t: t.strip(".,;:!?»«\"'()").lower()  # сравниваем слова без знаков: «₽.» и «₽» — одно слово
+    ok, nk = [_k(t) for t in ow], [_k(t) for t in nw]
+    if nk == ok[:len(nk)]:                     # новое — начало старого: хвост убран
+        return "убрано", _clip(" ".join(ow[len(nw):]), n), ""
+    if ok == nk[:len(ok)]:                     # старое — начало нового: хвост добавлен
+        return "добавлено", "", _clip(" ".join(nw[len(ow):]), n)
+    i = 0
+    while i < min(len(ow), len(nw)) and ok[i] == nk[i]:
+        i += 1
+    j = 0
+    while j < min(len(ow), len(nw)) - i and ok[-1 - j] == nk[-1 - j]:
+        j += 1
+    ctx = 2
+    a, b = max(0, i - ctx), ctx if j else 0
+    of = " ".join(ow[a:len(ow) - j + b]) if j else " ".join(ow[a:])
+    nf = " ".join(nw[a:len(nw) - j + b]) if j else " ".join(nw[a:])
+    return "изменение", (("…" if a > 0 else "") + _clip(of, n)), (("…" if a > 0 else "") + _clip(nf, n))
+
+
+def _was_became(param, old, new, n=110, dash=" "):
+    """Текст «param было „…“, стало „…“» по изменённому фрагменту; None — если по сути ничего не поменялось."""
+    kind, of, nf = diff_fragment(old, new, n)
+    if kind is None:
+        return None
+    if kind == "убрано":
+        return f"{param}{dash}— убрано «{of}»"
+    if kind == "добавлено":
+        return f"{param}{dash}— добавлено «{nf}»"
+    return f"{param}{dash}было «{of}», стало «{nf}»"
+
+
 def _restructure_line(group):
     """Одна строка по переписанной странице. Числа не выдёргиваем из фраз: 13.09.2026 «Скидка 2% от ставки»
     превратилась в «ставка: значение 2 % убрано» — неправда. Цитируем фразы как есть."""
@@ -131,7 +244,8 @@ def _restructure_line(group):
     for c in group:
         on, nn = _numunits(c["old"]), _numunits(c["new"])
         if c["kind"] == "изменение" and on != nn and (on or nn):
-            facts.append(f"{c['param']}: было «{_clip(c['old'], 70)}», стало «{_clip(c['new'], 70)}»")
+            wb = _was_became(c["param"] + ":", c["old"], c["new"], 70)
+            if wb: facts.append(wb)
         elif c["kind"] == "появилось" and nn:
             facts.append(f"появилось «{_clip(c['new'], 70)}»")
         elif c["kind"] == "исчезло" and on:
@@ -145,7 +259,10 @@ def _restructure_line(group):
 
 def _change_line(c):
     if c["kind"] == "изменение":
-        return f"{_a(c['bank'], c.get('url'))}, {c['product']}: {c['param']} было «{_clip(c['old'], 110)}», стало «{_clip(c['new'], 110)}»."
+        wb = _was_became(c["param"], c["old"], c["new"], 110)
+        if not wb:
+            return None                                # по сути не изменилось — строки нет (16.09.2026, Альфа)
+        return f"{_a(c['bank'], c.get('url'))}, {c['product']}: {wb}."
     if c["kind"] == "появилось":
         return f"{_a(c['bank'], c.get('url'))}, {c['product']}: на странице условий появилось «{_clip(c['new'], 130)}»."
     tail = " Новое значение на странице не указано." if c["param"] in ("ставка", "ПСК", "лимит", "льготный период", "минимальный платёж") else ""
@@ -223,7 +340,7 @@ _NPV_WEIGHTS = (
     (r"кредитн\w* карт|кредитк", 1.0),
     (r"кредит\w* наличн|потребительск\w* кредит|потребкредит|необеспеченн", 0.9),
     (r"рассрочк|bnpl|сплит", 0.9),
-    (r"бки\b|кредитн\w* истори|скоринг", 0.8),
+    (r"\bбки\b|кредитн\w* истори|скоринг", 0.8),   # 16.09: без \b слева «НБКИ» в источнике давало 0,8 автокредитам
     (r"просрочк|стоимост\w* риска|резерв", 0.8),
     (r"секьюритиз", 0.6),
     (r"микрозайм|мфо\b|микрофинанс", 0.5),
@@ -310,6 +427,16 @@ def dedupe_by_model(items):
             drop.add(i)
     return [x for i, x in enumerate(out) if i not in drop]
 
+
+def essays_this_week(titles, today, max_week=None):
+    """Сколько ДНЕЙ с разбором было за последние 7 дней (17.09.2026). Раньше считались записи журнала: 10.09 три поста
+    и черновики дали шесть записей за день, и с 14 по 17.09 разбор блокировался «7/3» при живом инфоповоде.
+    Разбор — не чаще одного в день, поэтому единица счёта — день, а не запись."""
+    import datetime as _dt
+    week_ago = (today - _dt.timedelta(days=7)).isoformat()
+    days = {t.get("date", "") for t in titles
+            if t.get("date", "") >= week_ago and t.get("rubric") not in ("тихий день", "сводка")}
+    return len(days)
 
 def trigger(chs):
     """Инфоповод для тематического разбора: банк поменял ключевой ценовой параметр
@@ -421,8 +548,12 @@ def build(chs, news_items, quotes, polished=None, n_pages=0, n_banks=0, streak=0
         main = kr
     elif price:
         c = price[0]; main_skip = ("ch", (c["bank"], c["product"]))
-        main = (f"{_a(c['bank'], c.get('url'))}, {c['product']}: {c['param']} — было «{_clip(c['old'], 60)}», стало «{_clip(c['new'], 60)}»." if c["kind"] == "изменение"
-                else f"{_a(c['bank'], c.get('url'))}, {c['product']}: {c['param']} — {'появилось' if c['kind'] == 'появилось' else 'убрано'} «{_clip(c['new'] or c['old'], 70)}».")
+        wb = _was_became(c["param"], c["old"], c["new"], 60) if c["kind"] == "изменение" else None
+        if c["kind"] == "изменение" and not wb:
+            main = ""; main_skip = None                 # текст по сути тот же — «Главного» из него не делаем
+        else:
+            main = (f"{_a(c['bank'], c.get('url'))}, {c['product']}: {wb}." if c["kind"] == "изменение"
+                    else f"{_a(c['bank'], c.get('url'))}, {c['product']}: {c['param']} — {'появилось' if c['kind'] == 'появилось' else 'убрано'} «{_clip(c['new'] or c['old'], 70)}».")
     elif bki:
         main = _news_line(bki[0]).lstrip("• "); main_skip = ("news", bki[0].get("title"))
     elif reg:
@@ -461,7 +592,11 @@ def build(chs, news_items, quotes, polished=None, n_pages=0, n_banks=0, streak=0
             elif c.get("restructure"):
                 lines.append("• " + _restructure_line([x for x in chs[:6] if (x["bank"], x["product"]) == k]))
             else:
-                lines.append("• " + _change_line(c))
+                cl = _change_line(c)
+                if cl:
+                    lines.append("• " + cl)
+                else:
+                    REJECTED.append(f"{c['bank']}/{c['product']}: «было» и «стало» совпадают после нормализации")
         if lines:
             parts.append("<b>Условия у банков</b>\n" + "\n".join(lines))
     else:
