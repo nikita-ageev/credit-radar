@@ -22,7 +22,7 @@
 Всё состояние — локально в state/, готовые посты и картинки — в out/.
 Источники только открытые. Внутренних данных банка здесь нет и быть не должно.
 """
-import os, re, sys, json, time, traceback
+import os, re, sys, json, time, traceback, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -696,6 +696,18 @@ def _eval_snapshot(date, **kw):
     except Exception as e:
         log(f"снимок для evals не записан: {type(e).__name__}: {e}")
 
+def week_data(days=7, today=None):
+    """Снимки дней за неделю для блока «Итоги недели» (1.1.0): evals/days/<дата>.json без вечерних; пропуски допустимы."""
+    today = today or core.msk().date()
+    out = []
+    for i in range(days, 0, -1):
+        d = today - datetime.timedelta(days=i)
+        p = os.path.join(EVAL_DAYS, d.isoformat() + ".json")
+        if os.path.exists(p):
+            j = _load_json(p, {})
+            out.append({"date": d.isoformat(), "chs": j.get("chs") or [], "news": j.get("news") or []})
+    return out
+
 def _save_json(path, obj):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f: json.dump(obj, f, ensure_ascii=False, indent=1, default=str)
@@ -1006,6 +1018,11 @@ def daily(dry=False, skip_crawl=False, full=False, theme=None):
     n_pages, n_banks_pub = _public_counts()
     dtext = digest.build(chs, news_items, quotes, polished, n_pages, n_banks_pub, streak,
                          now.strftime("%d.%m.%Y"))
+    if now.weekday() == 0 or "--week" in sys.argv:          # 1.1.0: по понедельникам сводка открывается итогами недели
+        wb = digest.week_block(week_data(7, now.date()), f"{(now - datetime.timedelta(days=7)):%d.%m}–{(now - datetime.timedelta(days=1)):%d.%m}")
+        if wb:
+            dtext = dtext + "\n\n" + wb
+            log("итоги недели: блок добавлен в сводку")
     dtext, _gate_dropped = gate.finalize(dtext, log)      # вёрстка → термины → шлюз: одна точка перед каналом и сайтом
     if _gate_dropped:
         log("шлюз: снято строк " + str(len(_gate_dropped)))
@@ -1246,6 +1263,9 @@ def main():
                 if "--theme" in sys.argv:
                     th = sys.argv[sys.argv.index("--theme") + 1]
                 daily(dry=dry, skip_crawl="--no-crawl" in sys.argv, full="--full" in sys.argv, theme=th)
+        elif cmd == "week":
+            import digest as _dg
+            print(_dg.week_block(week_data(7), "за 7 дней") or "(снимков нет)")
         elif cmd == "digest":
             d = digest()
             if d:

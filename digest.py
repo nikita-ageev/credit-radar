@@ -683,3 +683,45 @@ def check(text, chs, news_items):
 
 def is_empty(chs, news_items, quotes):
     return not chs and not [x for x in (news_items or []) if not x.get("repeat")] and not stock_lines(quotes)
+
+
+# ---------------- «Итоги недели» (1.1.0, 21.09.2026) ----------------
+# Выходные у банков тихие (19–20.09: обход 1 находка, вечер не вышел), а в понедельник читатель открывает канал
+# после паузы. Блок собирается из снимков дней (evals/days/<дата>.json: chs, news) без вызова модели: что менялось
+# у кого за 7 дней, сколько тихих дней, сколько новостей; цена 0 $. Числа из строк «было → стало» берутся как есть.
+_PRICE = ("ставка", "ПСК", "льготный период", "минимальный платёж", "комиссия", "лимит")
+
+def week_block(days, date_str=""):
+    """days — список {date, chs, news} за 7 дней (с любым числом пропусков). Возвращает HTML-блок или ''."""
+    days = [d for d in (days or []) if isinstance(d, dict)]
+    if not days:
+        return ""
+    chs = [c for d in days for c in (d.get("chs") or []) if isinstance(c, dict) and c.get("bank")]
+    n_news = sum(len([x for x in (d.get("news") or []) if not (isinstance(x, dict) and x.get("repeat"))]) for d in days)
+    quiet = sum(1 for d in days if not (d.get("chs") or []))
+    by_bank = {}
+    for c in chs:
+        by_bank.setdefault(c["bank"], {"n": 0, "products": set(), "price": [], "url": c.get("url")})
+        b = by_bank[c["bank"]]; b["n"] += 1; b["products"].add(c.get("product", ""))
+        if c.get("param") in _PRICE and c.get("old") and c.get("new") and _nums(c["old"]) != _nums(c["new"]) and diff_fragment(c["old"], c["new"])[0]:
+            b["price"].append(c)
+    lines = [f"<b>Итоги недели</b>" + (f" · {date_str}" if date_str else "")]
+    if not chs:
+        lines.append(f"За {len(days)} дн. значимых изменений условий у банков не найдено; новостей по розничному кредиту: {n_news}.")
+        return "\n".join(lines)
+    lines.append(f"Изменений условий: {len(chs)} у {len(by_bank)} {_pl(len(by_bank), 'банка', 'банков', 'банков')}; "
+                 f"тихих дней: {quiet} из {len(days)}; новостей: {n_news}.")
+    order = sorted(by_bank.items(), key=lambda kv: (-len(kv[1]["price"]), -kv[1]["n"], kv[0]))
+    for bank, b in order[:6]:
+        prods = ", ".join(sorted(p for p in b["products"] if p))
+        s = f"• {_a(bank, b['url'])} — {b['n']} {_pl(b['n'], 'изменение', 'изменения', 'изменений')} ({prods})"
+        if b["price"]:
+            c = b["price"][0]
+            wb = _was_became(c["param"], c["old"], c["new"], n=60)      # только изменённый фрагмент, не обрезанные копии
+            s += f": {wb}" if wb else f": {c['param']} {_clip(c['old'], 60)} → {_clip(c['new'], 60)}"
+            if len(b["price"]) > 1:
+                s += f" и ещё {len(b['price']) - 1} ценов{_pl(len(b['price']) - 1, 'ое', 'ых', 'ых')}"
+        lines.append(s + ".")
+    if len(order) > 6:
+        lines.append(f"Ещё {len(order) - 6}: " + ", ".join(bk for bk, _ in order[6:]) + ".")
+    return "\n".join(lines)
