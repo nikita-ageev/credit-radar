@@ -16,4 +16,4 @@ jobs:
       - name: Compile all modules
         run: python -m compileall -q .
       - name: Publication gate regression
-        run: python evals/gate_test.py && python evals/evening_test.py && python evals/version_test.py && python evals/daily_test.py && python evals/publish_test.py
+        run: python evals/gate_test.py && python evals/evening_test.py && python evals/version_test.py && python evals/daily_test.py && python evals/publish_test.py && python evals/week_test.py
