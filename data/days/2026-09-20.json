@@ -1,0 +1,251 @@
+{
+"date": "2026-09-20",
+"chs": [],
+"news": [],
+"quotes": {
+"ts": "2026-09-20T05:21:29+00:00",
+"date": "2026-09-20",
+"data": {
+"source": "iss.moex.com (открытый ISS API, без ключа)",
+"not_listed": {
+"Газпромбанк": "акции не торгуются, публичны только облигации ГПБ",
+"Wildberries (RWB)": "непубличная компания, акций в обращении нет",
+"Альфа-Банк": "непубличная, акции не торгуются",
+"Райффайзенбанк": "дочка RBI, на Мосбирже не торгуется",
+"Почта Банк": "непубличная, вошёл в периметр ВТБ"
+},
+"tickers": {
+"SBER": {
+"ok": true,
+"name": "Сбербанк",
+"last_close": 276.74,
+"last_date": "2026-09-18",
+"now": 275.91,
+"cap_rub": 5956054822680,
+"chg_1d": 0.31,
+"chg_1w": -2.32,
+"chg_1m": 0.15,
+"alpha_1d": -0.99,
+"alpha_1w": -2.19,
+"alpha_1m": -4.71,
+"turnover_rub": 4101119131.64,
+"turnover_vs_median20": 0.54,
+"flags": []
+},
+"VTBR": {
+"ok": true,
+"name": "ВТБ",
+"last_close": 50.16,
+"last_date": "2026-09-18",
+"now": 50.085,
+"cap_rub": 647487180945.36,
+"chg_1d": 0.16,
+"chg_1w": -3.33,
+"chg_1m": -6.9,
+"alpha_1d": -1.14,
+"alpha_1w": -3.2,
+"alpha_1m": -11.76,
+"turnover_rub": 1532341858.88,
+"turnover_vs_median20": 0.51,
+"flags": []
+},
+"T": {
+"ok": true,
+"name": "Т-Технологии",
+"last_close": 253.4,
+"last_date": "2026-09-18",
+"now": 253.24,
+"cap_rub": 679379068066.4,
+"chg_1d": 0.52,
+"chg_1w": -3.06,
+"chg_1m": -2.59,
+"alpha_1d": -0.78,
+"alpha_1w": -2.93,
+"alpha_1m": -7.45,
+"turnover_rub": 2494591600.58,
+"turnover_vs_median20": 0.52,
+"flags": []
+},
+"SVCB": {
+"ok": true,
+"name": "Совкомбанк",
+"last_close": 9.64,
+"last_date": "2026-09-18",
+"now": 9.66,
+"cap_rub": 217506771222.3,
+"chg_1d": -1.38,
+"chg_1w": -3.5,
+"chg_1m": -5.54,
+"alpha_1d": -2.68,
+"alpha_1w": -3.37,
+"alpha_1m": -10.4,
+"turnover_rub": 608723796,
+"turnover_vs_median20": 0.82,
+"flags": []
+},
+"MBNK": {
+"ok": true,
+"name": "МТС Банк",
+"last_close": 927,
+"last_date": "2026-09-18",
+"now": 929,
+"cap_rub": 34862245773,
+"chg_1d": 0.6,
+"chg_1w": 0.27,
+"chg_1m": 1.31,
+"alpha_1d": -0.7,
+"alpha_1w": 0.4,
+"alpha_1m": -3.55,
+"turnover_rub": 11425858,
+"turnover_vs_median20": 0.34,
+"flags": []
+},
+"OZON": {
+"ok": true,
+"name": "Озон",
+"last_close": 2709.5,
+"last_date": "2026-09-18",
+"now": 2708.5,
+"cap_rub": 586156595830.5,
+"chg_1d": 0.84,
+"chg_1w": 7.03,
+"chg_1m": -8.85,
+"alpha_1d": -0.46,
+"alpha_1w": 7.16,
+"alpha_1m": -13.71,
+"turnover_rub": 2113384160.5,
+"turnover_vs_median20": 0.29,
+"flags": [
+"альфа за неделю +7.2 п.п."
+]
+},
+"YDEX": {
+"ok": true,
+"name": "Яндекс",
+"last_close": 3816,
+"last_date": "2026-09-18",
+"now": 3709.5,
+"cap_rub": 1472326809550.5,
+"chg_1d": 2.32,
+"chg_1w": 1.99,
+"chg_1m": 2.43,
+"alpha_1d": 1.02,
+"alpha_1w": 2.12,
+"alpha_1m": -2.43,
+"turnover_rub": 3026540165.5,
+"turnover_vs_median20": 1.06,
+"flags": []
+},
+"RENI": {
+"ok": true,
+"name": "Ренессанс Страхование",
+"last_close": 67.74,
+"last_date": "2026-09-18",
+"now": 67.54,
+"cap_rub": 37616590761.2,
+"chg_1d": 0.21,
+"chg_1w": -2.81,
+"chg_1m": -6.33,
+"alpha_1d": -1.09,
+"alpha_1w": -2.68,
+"alpha_1m": -11.19,
+"turnover_rub": 75046627,
+"turnover_vs_median20": 1.62,
+"flags": []
+},
+"BSPB": {
+"ok": true,
+"name": "Банк Санкт-Петербург",
+"last_close": 252.51,
+"last_date": "2026-09-18",
+"now": 252.46,
+"cap_rub": 112437736811.66,
+"chg_1d": -0.32,
+"chg_1w": 0.12,
+"chg_1m": 2.9,
+"alpha_1d": -1.62,
+"alpha_1w": 0.25,
+"alpha_1m": -1.96,
+"turnover_rub": 151030037.6,
+"turnover_vs_median20": 0.65,
+"flags": []
+},
+"CBOM": {
+"ok": true,
+"name": "МКБ",
+"last_close": 10.16,
+"last_date": "2026-09-18",
+"now": 10.152,
+"cap_rub": 339378414559.63,
+"chg_1d": -2.97,
+"chg_1w": -1.36,
+"chg_1m": -20.74,
+"alpha_1d": -4.27,
+"alpha_1w": -1.23,
+"alpha_1m": -25.6,
+"turnover_rub": 128552380.7,
+"turnover_vs_median20": 0.84,
+"flags": [
+"альфа за день -4.3 п.п."
+]
+}
+},
+"errors": [],
+"index": {
+"IMOEX": {
+"chg_1d": 1.3,
+"chg_1w": -0.13,
+"chg_1m": 4.86,
+"last": 2278.06
+}
+},
+"delta": {
+"SBER": {
+"prev_close": 276.74,
+"move_since_prev": 0.0
+},
+"VTBR": {
+"prev_close": 50.16,
+"move_since_prev": 0.0
+},
+"T": {
+"prev_close": 253.4,
+"move_since_prev": 0.0
+},
+"SVCB": {
+"prev_close": 9.64,
+"move_since_prev": 0.0
+},
+"MBNK": {
+"prev_close": 927,
+"move_since_prev": 0.0
+},
+"OZON": {
+"prev_close": 2709.5,
+"move_since_prev": 0.0
+},
+"YDEX": {
+"prev_close": 3816,
+"move_since_prev": 0.0
+},
+"RENI": {
+"prev_close": 67.74,
+"move_since_prev": 0.0
+},
+"BSPB": {
+"prev_close": 252.51,
+"move_since_prev": 0.0
+},
+"CBOM": {
+"prev_close": 10.16,
+"move_since_prev": 0.0
+}
+}
+}
+},
+"digest": "<b>Сводка за 20.09.2026</b>\n\n<b>Условия у банков</b>\nБез изменений: проверено 34 страницы у 12 банков.\n\n<b>Новости</b>\nНовых новостей по розничному кредиту за сутки нет.",
+"n_pages": 34,
+"n_banks": 12,
+"streak": 0,
+"version": "1.0.3+5c285b6"
+}

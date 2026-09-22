@@ -1,0 +1,340 @@
+{
+"date": "2026-09-17",
+"chs": [
+{
+"bank": "МТС-Банк",
+"product": "кредитная карта",
+"url": "https://www.mtsbank.ru/chastnim-licam/karti/credit-zero/",
+"param": "ставка",
+"old": "Ставка до 19,9%",
+"new": "Ставка до 20,0%",
+"kind": "изменение",
+"raw": 2,
+"restructure": false
+},
+{
+"bank": "МТС-Банк",
+"product": "кредит наличными",
+"url": "https://www.mtsbank.ru/chastnim-licam/krediti/credit-all/",
+"param": "ставка",
+"old": "Ставка до 19,9%",
+"new": "Ставка до 20,0%",
+"kind": "изменение",
+"raw": 2,
+"restructure": false
+},
+{
+"bank": "МТС-Банк",
+"product": "автокредит",
+"url": "https://www.mtsbank.ru/chastnim-licam/krediti/kredit-pod-zalog-avto/",
+"param": "ставка",
+"old": "Ставка до 19,9%",
+"new": "Ставка до 20,0%",
+"kind": "изменение",
+"raw": 2,
+"restructure": false
+}
+],
+"news": [
+{
+"src": "Ведомости",
+"title": "ВТБ: выдачи рыночной ипотеки выросли в пять раз",
+"link": "https://www.vedomosti.ru/finance/news/2026/09/17/1229505-vtb-vidachi-rinochnoi",
+"desc": "",
+"dt": "2026-09-17 09:00:00+03:00",
+"repeat": false
+},
+{
+"src": "Frank Media",
+"title": "Сбербанк может получить часть проектов «Самолета»",
+"link": "https://frankmedia.ru/305135?utm_source=telegram&amp;utm_medium=messenger&amp;utm_campaign=tf",
+"desc": "🏦 Сбербанк может получить часть проектов «Самолета»\n\nСбербанк, крупнейший кредитор группы «Самолет», может получить в управление часть бизнеса девелопера в рамках реструктуризации его займов, пишут «Коммерсантъ» со ссылкой на три источника. \n\nСреди обсуждаемых вариантов – реструктуризация кредитов под залог активов бенефициаров или вхождение банка в капитал дочерних структур, реализующих проекты с",
+"dt": "2026-09-17 05:18:37+00:00",
+"via": "https://t.me/frank_media/23955",
+"ext": [
+"https://frankmedia.ru/305135?utm_source=telegram&amp;utm_medium=messenger&amp;utm_campaign=tf",
+"https://frankmedia.ru/newsletter?utm_source=email&amp;utm_medium=subscribepage&amp;utm_campaign=fm_footer"
+],
+"repeat": false
+},
+{
+"src": "Коммерсантъ",
+"title": "Крайним будешь // Верховный суд поставил соучастников растраты активов «Югры» в конец очереди кредиторов",
+"link": "https://www.kommersant.ru/doc/8956468",
+"desc": "Верховный суд РФ (ВС) отправил в последнюю очередь требования трех кредиторов обанкротившегося банка «Югра», которых связывали с бенефициаром кредитной организации. Суд установил, что эти лица содействовали растрате 23,6 млрд руб. банка чер",
+"dt": "2026-09-16 20:30:40+03:00",
+"repeat": false
+},
+{
+"src": "Ведомости",
+"title": "НБКИ: средний размер автокредита в августе составил 1,59 млн рублей",
+"link": "https://www.vedomosti.ru/finance/news/2026/09/16/1229378-razmer-avtokredita",
+"desc": "",
+"dt": "2026-09-16 18:41:47+03:00",
+"repeat": true
+},
+{
+"src": "Труба под Неглинной",
+"title": "Выдача кредитов наличными в России достигла двухлетнего максимума",
+"link": "https://t.me/trubapodneglinnoy/14776",
+"desc": "Выдача кредитов наличными в России достигла двухлетнего максимума\n\nВ августе российские банки выдали населению 2,4 млн кредитов наличными на общую сумму 492 млрд рублей. По количеству оформленных займов этот показатель стал рекордным за последние два года.\n\nВсего за первые восемь месяцев 2026 года россияне получили 16,33 млн кредитов наличными. Общий объем выдач за этот период достиг 3,31 трлн руб",
+"dt": "2026-09-16 08:39:45+00:00",
+"via": "https://t.me/trubapodneglinnoy/14776",
+"ext": [],
+"repeat": true
+},
+{
+"src": "Труба под Неглинной",
+"title": "Т-Банк выпустил новое замаскированное приложение в App Store",
+"link": "https://t.me/trubapodneglinnoy/14775",
+"desc": "Т-Банк выпустил новое замаскированное приложение в App Store\n\nВ магазине приложений Apple появилось новое замаскированное приложение Т-Банка. Программа получила название Craftersy и визуально оформлена как онлайн-книга рецептов для всей семьи. Разработчиком сервиса указан Маркус Лимпман.\n\nКредитная организация рекомендует клиентам установить новинку из-за технических проблем в прошлых сборках. В б",
+"dt": "2026-09-16 07:12:00+00:00",
+"via": "https://t.me/trubapodneglinnoy/14775",
+"ext": [],
+"repeat": true
+}
+],
+"quotes": {
+"ts": "2026-09-17T05:21:29+00:00",
+"date": "2026-09-17",
+"data": {
+"source": "iss.moex.com (открытый ISS API, без ключа)",
+"not_listed": {
+"Газпромбанк": "акции не торгуются, публичны только облигации ГПБ",
+"Wildberries (RWB)": "непубличная компания, акций в обращении нет",
+"Альфа-Банк": "непубличная, акции не торгуются",
+"Райффайзенбанк": "дочка RBI, на Мосбирже не торгуется",
+"Почта Банк": "непубличная, вошёл в периметр ВТБ"
+},
+"tickers": {
+"SBER": {
+"ok": true,
+"name": "Сбербанк",
+"last_close": 279.94,
+"last_date": "2026-09-16",
+"now": 279.94,
+"cap_rub": 6043050223120,
+"chg_1d": -1.74,
+"chg_1w": 1.05,
+"chg_1m": 3.3,
+"alpha_1d": 0.5,
+"alpha_1w": 0.13,
+"alpha_1m": -5.85,
+"turnover_rub": 9365806204.49,
+"turnover_vs_median20": 1.29,
+"flags": []
+},
+"VTBR": {
+"ok": true,
+"name": "ВТБ",
+"last_close": 50.38,
+"last_date": "2026-09-16",
+"now": 50.38,
+"cap_rub": 651300872038.08,
+"chg_1d": -1.68,
+"chg_1w": -1.83,
+"chg_1m": -3.43,
+"alpha_1d": 0.56,
+"alpha_1w": -2.75,
+"alpha_1m": -12.58,
+"turnover_rub": 2988495915.05,
+"turnover_vs_median20": 1.0,
+"flags": []
+},
+"T": {
+"ok": true,
+"name": "Т-Технологии",
+"last_close": 255.78,
+"last_date": "2026-09-16",
+"now": 255.78,
+"cap_rub": 686193247630.8,
+"chg_1d": -2.69,
+"chg_1w": -1.61,
+"chg_1m": 1.19,
+"alpha_1d": -0.45,
+"alpha_1w": -2.53,
+"alpha_1m": -7.96,
+"turnover_rub": 4817413733.72,
+"turnover_vs_median20": 1.03,
+"flags": []
+},
+"SVCB": {
+"ok": true,
+"name": "Совкомбанк",
+"last_close": 9.97,
+"last_date": "2026-09-16",
+"now": 9.97,
+"cap_rub": 224486802182.85,
+"chg_1d": -1.43,
+"chg_1w": 0.45,
+"chg_1m": 0.1,
+"alpha_1d": 0.81,
+"alpha_1w": -0.47,
+"alpha_1m": -9.05,
+"turnover_rub": 459053615,
+"turnover_vs_median20": 0.62,
+"flags": []
+},
+"MBNK": {
+"ok": true,
+"name": "МТС Банк",
+"last_close": 925.5,
+"last_date": "2026-09-16",
+"now": 925.5,
+"cap_rub": 34730902543.5,
+"chg_1d": -1.44,
+"chg_1w": -0.8,
+"chg_1m": 4.16,
+"alpha_1d": 0.8,
+"alpha_1w": -1.72,
+"alpha_1m": -4.99,
+"turnover_rub": 23663367.5,
+"turnover_vs_median20": 0.74,
+"flags": []
+},
+"OZON": {
+"ok": true,
+"name": "Озон",
+"last_close": 2713,
+"last_date": "2026-09-16",
+"now": 2713,
+"cap_rub": 587130457629,
+"chg_1d": 1.42,
+"chg_1w": 3.61,
+"chg_1m": -6.03,
+"alpha_1d": 3.66,
+"alpha_1w": 2.69,
+"alpha_1m": -15.18,
+"turnover_rub": 4606854991,
+"turnover_vs_median20": 0.63,
+"flags": [
+"альфа за день +3.7 п.п."
+]
+},
+"YDEX": {
+"ok": true,
+"name": "Яндекс",
+"last_close": 3766,
+"last_date": "2026-09-16",
+"now": 3766,
+"cap_rub": 1491384796062,
+"chg_1d": -2.09,
+"chg_1w": -1.77,
+"chg_1m": 4.84,
+"alpha_1d": 0.15,
+"alpha_1w": -2.69,
+"alpha_1m": -4.31,
+"turnover_rub": 2730859278.5,
+"turnover_vs_median20": 0.95,
+"flags": []
+},
+"RENI": {
+"ok": true,
+"name": "Ренессанс Страхование",
+"last_close": 68.4,
+"last_date": "2026-09-16",
+"now": 68.4,
+"cap_rub": 38095570152,
+"chg_1d": -2.51,
+"chg_1w": -1.67,
+"chg_1m": -2.95,
+"alpha_1d": -0.27,
+"alpha_1w": -2.59,
+"alpha_1m": -12.1,
+"turnover_rub": 46008672,
+"turnover_vs_median20": 0.92,
+"flags": []
+},
+"BSPB": {
+"ok": true,
+"name": "Банк Санкт-Петербург",
+"last_close": 251.61,
+"last_date": "2026-09-16",
+"now": 251.61,
+"cap_rub": 112059173568.81,
+"chg_1d": -0.47,
+"chg_1w": 0.13,
+"chg_1m": 4.16,
+"alpha_1d": 1.77,
+"alpha_1w": -0.79,
+"alpha_1m": -4.99,
+"turnover_rub": 208372734.4,
+"turnover_vs_median20": 0.88,
+"flags": []
+},
+"CBOM": {
+"ok": true,
+"name": "МКБ",
+"last_close": 10.554,
+"last_date": "2026-09-16",
+"now": 10.554,
+"cap_rub": 352817157925.76,
+"chg_1d": -1.35,
+"chg_1w": 3.98,
+"chg_1m": -12.11,
+"alpha_1d": 0.89,
+"alpha_1w": 3.06,
+"alpha_1m": -21.26,
+"turnover_rub": 123889064.7,
+"turnover_vs_median20": 0.75,
+"flags": []
+}
+},
+"errors": [],
+"index": {
+"IMOEX": {
+"chg_1d": -2.24,
+"chg_1w": 0.92,
+"chg_1m": 9.15,
+"last": 2284.84
+}
+},
+"delta": {
+"SBER": {
+"prev_close": 284.91,
+"move_since_prev": -1.74
+},
+"VTBR": {
+"prev_close": 51.24,
+"move_since_prev": -1.68
+},
+"T": {
+"prev_close": 262.86,
+"move_since_prev": -2.69
+},
+"SVCB": {
+"prev_close": 10.115,
+"move_since_prev": -1.43
+},
+"MBNK": {
+"prev_close": 939,
+"move_since_prev": -1.44
+},
+"OZON": {
+"prev_close": 2675,
+"move_since_prev": 1.42
+},
+"YDEX": {
+"prev_close": 3846.5,
+"move_since_prev": -2.09
+},
+"RENI": {
+"prev_close": 70.16,
+"move_since_prev": -2.51
+},
+"BSPB": {
+"prev_close": 252.79,
+"move_since_prev": -0.47
+},
+"CBOM": {
+"prev_close": 10.698,
+"move_since_prev": -1.35
+}
+}
+}
+},
+"digest": "<b>Сводка за 17.09.2026</b>\n\n<b>Главное.</b> <a href=\"https://www.mtsbank.ru/chastnim-licam/karti/credit-zero/\">МТС-Банк</a>, кредитная карта: ставка было «Ставка до 19,9%», стало «Ставка до 20,0%».\n\n<b>Условия у банков</b>\n• <a href=\"https://www.mtsbank.ru/chastnim-licam/krediti/credit-all/\">МТС-Банк</a> поднял максимальную ставку по кредиту наличными с 19,9% до 20,0%. Заёмщики с невысоким рейтингом заплатят чуть больше, а разрыв с другими банками по верхней ставке немного вырос.\n• <a href=\"https://www.mtsbank.ru/chastnim-licam/krediti/kredit-pod-zalog-avto/\">МТС-Банк</a> повысил максимальную ставку по автокредиту с 19,9% до 20,0%. Для заёмщика удорожание минимально, для банка это синхронное с другими продуктами движение верхней планки ради маржи.\n\n<b>Новости</b>\n• Ведомости: <a href=\"https://www.vedomosti.ru/finance/news/2026/09/17/1229505-vtb-vidachi-rinochnoi\">ВТБ: выдачи рыночной ипотеки выросли в пять раз</a> — Рыночная ипотека оживает: другим банкам придётся активнее бороться за ипотечного заёмщика.\n• Frank Media: <a href=\"https://frankmedia.ru/305135?utm_source=telegram&amp;utm_medium=messenger&amp;utm_campaign=tf\">Сбербанк может получить часть проектов «Самолета»</a>.\n• Коммерсантъ: <a href=\"https://www.kommersant.ru/doc/8956468\">Крайним будешь // Верховный суд поставил соучастников растраты активов «Югры» в конец очереди кредиторов</a>.",
+"n_pages": 34,
+"n_banks": 12,
+"streak": 0
+}
