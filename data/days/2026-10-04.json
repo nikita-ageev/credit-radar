@@ -1,0 +1,282 @@
+{
+"date": "2026-10-04",
+"chs": [
+{
+"bank": "ОТП Банк",
+"product": "кредит наличными",
+"url": "https://www.otpbank.ru/retail/credits/cash/",
+"param": "лимит",
+"old": "",
+"new": "До 3 000 000 ₽ на карту или наличными",
+"kind": "появилось",
+"raw": 2,
+"restructure": false
+}
+],
+"news": [
+{
+"src": "Прайм",
+"title": "Названо главное правило для хорошей кредитной истории",
+"link": "https://1prime.ru/20261004/frumina-873853210.html",
+"desc": "",
+"dt": "2026-10-04 02:02:00+03:00",
+"repeat": false
+},
+{
+"src": "Финтехно",
+"title": "Очень полезный референс для России — из Узбекистана: в стране появился цифровой сервис, где можно увидеть все банковские карты, оформленные на своё имя.",
+"link": "https://t.me/fintexno/8593",
+"desc": "Очень полезный референс для России — из Узбекистана: в стране появился цифровой сервис, где можно увидеть все банковские карты, оформленные на своё имя. Более того, июльское постановление президента предусматривает следующий шаг — возможность прямо через MyGov отправить банку-эмитенту заявление на блокировку или закрытие карты. Всё это — ровно тот недостающий пазл инициативы, которая в нашей стран",
+"dt": "2026-10-03 09:11:01+00:00",
+"via": "https://t.me/fintexno/8593",
+"ext": [],
+"repeat": false
+}
+],
+"quotes": {
+"ts": "2026-10-04T05:21:28+00:00",
+"date": "2026-10-04",
+"data": {
+"source": "iss.moex.com (открытый ISS API, без ключа)",
+"not_listed": {
+"Газпромбанк": "акции не торгуются, публичны только облигации ГПБ",
+"Wildberries (RWB)": "непубличная компания, акций в обращении нет",
+"Альфа-Банк": "непубличная, акции не торгуются",
+"Райффайзенбанк": "дочка RBI, на Мосбирже не торгуется",
+"Почта Банк": "непубличная, вошёл в периметр ВТБ"
+},
+"tickers": {
+"SBER": {
+"ok": true,
+"name": "Сбербанк",
+"last_close": 275.45,
+"last_date": "2026-10-02",
+"now": 275.27,
+"cap_rub": 5942239175960,
+"chg_1d": -0.26,
+"chg_1w": -0.33,
+"chg_1m": 0.43,
+"alpha_1d": -0.31,
+"alpha_1w": -0.59,
+"alpha_1m": -3.9,
+"turnover_rub": 3695268209,
+"turnover_vs_median20": 0.62,
+"flags": []
+},
+"VTBR": {
+"ok": true,
+"name": "ВТБ",
+"last_close": 52,
+"last_date": "2026-10-02",
+"now": 51.99,
+"cap_rub": 672114575967.84,
+"chg_1d": 0.05,
+"chg_1w": 1.55,
+"chg_1m": 0.29,
+"alpha_1d": 0.0,
+"alpha_1w": 1.29,
+"alpha_1m": -4.04,
+"turnover_rub": 2198659152.25,
+"turnover_vs_median20": 0.81,
+"flags": []
+},
+"T": {
+"ok": true,
+"name": "Т-Технологии",
+"last_close": 260.5,
+"last_date": "2026-10-02",
+"now": 260.34,
+"cap_rub": 698426577872.4,
+"chg_1d": 0.12,
+"chg_1w": 3.96,
+"chg_1m": 2.31,
+"alpha_1d": 0.07,
+"alpha_1w": 3.7,
+"alpha_1m": -2.02,
+"turnover_rub": 3350483626.78,
+"turnover_vs_median20": 0.76,
+"flags": []
+},
+"SVCB": {
+"ok": true,
+"name": "Совкомбанк",
+"last_close": 9.58,
+"last_date": "2026-10-02",
+"now": 9.55,
+"cap_rub": 215029986042.75,
+"chg_1d": 1.81,
+"chg_1w": 0.21,
+"chg_1m": -6.76,
+"alpha_1d": 1.76,
+"alpha_1w": -0.05,
+"alpha_1m": -11.09,
+"turnover_rub": 362017424.5,
+"turnover_vs_median20": 0.56,
+"flags": []
+},
+"MBNK": {
+"ok": true,
+"name": "МТС Банк",
+"last_close": 923.5,
+"last_date": "2026-10-02",
+"now": 923.5,
+"cap_rub": 34655849269.5,
+"chg_1d": 0.27,
+"chg_1w": 1.54,
+"chg_1m": -1.96,
+"alpha_1d": 0.22,
+"alpha_1w": 1.28,
+"alpha_1m": -6.29,
+"turnover_rub": 9119428,
+"turnover_vs_median20": 0.39,
+"flags": []
+},
+"OZON": {
+"ok": true,
+"name": "Озон",
+"last_close": 3144,
+"last_date": "2026-10-02",
+"now": 3150,
+"cap_rub": 681703258950,
+"chg_1d": 0.45,
+"chg_1w": 7.51,
+"chg_1m": 31.38,
+"alpha_1d": 0.4,
+"alpha_1w": 7.25,
+"alpha_1m": 27.05,
+"turnover_rub": 6448916460.5,
+"turnover_vs_median20": 1.14,
+"flags": [
+"альфа за неделю +7.2 п.п."
+]
+},
+"YDEX": {
+"ok": true,
+"name": "Яндекс",
+"last_close": 3603,
+"last_date": "2026-10-02",
+"now": 3604.5,
+"cap_rub": 1430651566255.5,
+"chg_1d": -0.12,
+"chg_1w": 0.49,
+"chg_1m": 0.61,
+"alpha_1d": -0.17,
+"alpha_1w": 0.23,
+"alpha_1m": -3.72,
+"turnover_rub": 980023333,
+"turnover_vs_median20": 0.36,
+"flags": []
+},
+"RENI": {
+"ok": true,
+"name": "Ренессанс Страхование",
+"last_close": 68.16,
+"last_date": "2026-10-02",
+"now": 68,
+"cap_rub": 37872789040,
+"chg_1d": 2.34,
+"chg_1w": 1.04,
+"chg_1m": -0.47,
+"alpha_1d": 2.29,
+"alpha_1w": 0.78,
+"alpha_1m": -4.8,
+"turnover_rub": 45457881,
+"turnover_vs_median20": 1.01,
+"flags": []
+},
+"BSPB": {
+"ok": true,
+"name": "Банк Санкт-Петербург",
+"last_close": 272.2,
+"last_date": "2026-10-02",
+"now": 253.14,
+"cap_rub": 112740587405.94,
+"chg_1d": 2.24,
+"chg_1w": 4.1,
+"chg_1m": 12.78,
+"alpha_1d": 2.19,
+"alpha_1w": 3.84,
+"alpha_1m": 8.45,
+"turnover_rub": 649296217.5,
+"turnover_vs_median20": 2.8,
+"flags": [
+"оборот x2.8 к медиане 20 дней"
+]
+},
+"CBOM": {
+"ok": true,
+"name": "МКБ",
+"last_close": 8.432,
+"last_date": "2026-10-02",
+"now": 8.453,
+"cap_rub": 282581337497.3,
+"chg_1d": -1.28,
+"chg_1w": -6.56,
+"chg_1m": -11.71,
+"alpha_1d": -1.33,
+"alpha_1w": -6.82,
+"alpha_1m": -16.04,
+"turnover_rub": 85328312,
+"turnover_vs_median20": 0.67,
+"flags": []
+}
+},
+"errors": [],
+"index": {
+"IMOEX": {
+"chg_1d": 0.05,
+"chg_1w": 0.26,
+"chg_1m": 4.33,
+"last": 2279.75
+}
+},
+"delta": {
+"SBER": {
+"prev_close": 275.45,
+"move_since_prev": 0.0
+},
+"VTBR": {
+"prev_close": 52,
+"move_since_prev": 0.0
+},
+"T": {
+"prev_close": 260.5,
+"move_since_prev": 0.0
+},
+"SVCB": {
+"prev_close": 9.58,
+"move_since_prev": 0.0
+},
+"MBNK": {
+"prev_close": 923.5,
+"move_since_prev": 0.0
+},
+"OZON": {
+"prev_close": 3144,
+"move_since_prev": 0.0
+},
+"YDEX": {
+"prev_close": 3603,
+"move_since_prev": 0.0
+},
+"RENI": {
+"prev_close": 68.16,
+"move_since_prev": 0.0
+},
+"BSPB": {
+"prev_close": 272.2,
+"move_since_prev": 0.0
+},
+"CBOM": {
+"prev_close": 8.432,
+"move_since_prev": 0.0
+}
+}
+}
+},
+"digest": "<b>Сводка за 04.10.2026</b>\n\n<b>Условия у банков</b>\n• <a href=\"https://www.otpbank.ru/retail/credits/cash/\">ОТП Банк</a> на странице кредита наличными добавил лимит: до 3 000 000 ₽ на карту или наличными, раньше максимальная сумма не указывалась. Заёмщик теперь видит потолок суммы до подачи заявки и может сразу сравнить его с лимитами других банков.\n\n<b>Новости</b>\n• Прайм: <a href=\"https://1prime.ru/20261004/frumina-873853210.html\">Названо главное правило для хорошей кредитной истории</a>.",
+"n_pages": 34,
+"n_banks": 12,
+"streak": 0,
+"version": "1.4.9+9fe0d76"
+}
