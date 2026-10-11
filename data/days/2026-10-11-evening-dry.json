@@ -1,0 +1,36 @@
+{
+"date": "2026-10-11",
+"ts": "2026-10-11T20:00:25.415678+00:00",
+"version": "1.6.0+89bfbc3",
+"input": [
+{
+"src": "finansist-kras.ru",
+"title": "Сбер начал рассылать уведомления о снижении лимитов по кредиткам",
+"link": "https://www.finansist-kras.ru/news/banks/sber-nachal-rassylat-uvedomleniya-o-snizhenii-limitov-po-kreditkam/",
+"desc": "Сбер начал рассылать уведомления о снижении лимитов по кредиткам Держателям «Кредитной СберКарты» с грейс-периодом 120 дней рассылают уведомления о снижении суммы кредитного лимита, обратил внимание телеграм-канал «Дайджест». Канал опублико",
+"dt": "2026-10-09T00:00:00+00:00",
+"repeat": false
+}
+],
+"items": [
+{
+"title": "Сбер начал рассылать уведомления о снижении лимитов по кредиткам",
+"src": "finansist-kras.ru",
+"link": "https://www.finansist-kras.ru/news/banks/sber-nachal-rassylat-uvedomleniya-o-snizhenii-limitov-po-kreditkam/",
+"article_chars": 2304,
+"article_how": "http",
+"extracted": {
+"facts": [],
+"why": ""
+},
+"code_dropped": [],
+"gate": "нет добавочной информации"
+}
+],
+"text": "",
+"dropped": 1,
+"kept": 0,
+"judged": 0,
+"cost_usd": 0.0,
+"seconds": 134
+}
