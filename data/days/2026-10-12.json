@@ -1,0 +1,309 @@
+{
+"date": "2026-10-12",
+"chs": [],
+"news": [
+{
+"src": "Труба под Неглинной",
+"title": "ЦБ раскрыл сценарии использования цифрового рубля",
+"link": "https://t.me/trubapodneglinnoy/15040",
+"desc": "ЦБ раскрыл сценарии использования цифрового рубля\n\nБанк России определил основные сценарии использования национальной цифровой валюты. Как заявила зампред регулятора Зульфия Кахруманова, в их число войдут бесплатные переводы крупных сумм между физическими лицами без ограничений по лимитам.\n\nДля корпоративного сектора предусмотрено развитие цифрового эквайринга, а также возможность выплаты заработн",
+"dt": "2026-10-12 05:31:17+00:00",
+"via": "https://t.me/trubapodneglinnoy/15040",
+"ext": [],
+"repeat": false
+},
+{
+"src": "runews24.ru",
+"title": "Банки режут лимиты по кредиткам: россияне узнают о снижении сумм уже после покупок",
+"link": "https://runews24.ru/economy/12/10/2026/banki-rezhut-limityi-po-kreditkam-rossiyane-uznayut-o-snizhenii-summ-uzhe-posle-pokupok",
+"desc": "Банки режут лимиты по кредиткам: россияне узнают о снижении сумм уже после покупок - RuNews24.ru - 12.10.2026",
+"dt": "2026-10-12 03:22:00+00:00",
+"repeat": false
+},
+{
+"src": "Прайм",
+"title": "АСВ может получить права требования по кредиту Ле Пен в России",
+"link": "https://1prime.ru/20261012/asv-874135792.html",
+"desc": "",
+"dt": "2026-10-12 06:08:30+03:00",
+"repeat": false
+},
+{
+"src": "Ведомости",
+"title": "ЦБ уточнил расчеты ставки по семейной ипотеке после завершения господдержки",
+"link": "https://www.vedomosti.ru/finance/articles/2026/10/12/1236125-tsb-utochnil-rascheti-stavki",
+"desc": "Она не может быть увеличена более чем на 4 п. п. или быть выше ключевой плюс 3 п. п.",
+"dt": "2026-10-12 00:09:04+03:00",
+"repeat": false
+},
+{
+"src": "news.pnz.ru",
+"title": "Банки ужесточили выдачу кредитов заемщикам с высокой долговой нагрузкой: советы эксперта",
+"link": "https://news.pnz.ru/russia/banki-uzhestochili-vydachu-kreditov-zaemshhikam-s-vysokoj-dolgovoj-nagruzkoj-sovety-eksperta/",
+"desc": "Банки ужесточили выдачу кредитов заемщикам с высокой долговой нагрузкой: советы эксперта | NEWS.PNZ.RU С октября банки и микрофинансовые организации работают по более жестким макропруденциальным лимитам. Для потребительских кредитов доля вы",
+"dt": "2026-10-11 00:19:00+00:00",
+"repeat": false
+},
+{
+"src": "ru.themoscowtimes.com",
+"title": "«Во многих отраслях проблемы». Сбербанк столкнулся с ростом просроченных кредитов",
+"link": "https://ru.themoscowtimes.com/2026/10/09/vo-mnogih-otraslyah-problemi-sberbank-stolknulsya-s-rostom-prosrochennih-kreditov-a208244",
+"desc": "«Во многих отраслях проблемы». Сбербанк столкнулся с ростом просроченных кредитов - Русская служба The Moscow Times Финансовое положение российских компаний ухудшается, и они все чаще не могут платить по долгам. Крупнейший в стране кредитор",
+"dt": "2026-10-09 13:55:00+00:00",
+"repeat": false
+}
+],
+"quotes": {
+"ts": "2026-10-12T05:21:57+00:00",
+"date": "2026-10-12",
+"data": {
+"source": "iss.moex.com (открытый ISS API, без ключа)",
+"not_listed": {
+"Газпромбанк": "акции не торгуются, публичны только облигации ГПБ",
+"Wildberries (RWB)": "непубличная компания, акций в обращении нет",
+"Альфа-Банк": "непубличная, акции не торгуются",
+"Райффайзенбанк": "дочка RBI, на Мосбирже не торгуется",
+"Почта Банк": "непубличная, вошёл в периметр ВТБ"
+},
+"tickers": {
+"SBER": {
+"ok": true,
+"name": "Сбербанк",
+"last_close": 285.02,
+"last_date": "2026-10-09",
+"now": 285.84,
+"cap_rub": 6170413216320,
+"chg_1d": 1.63,
+"chg_1w": 3.47,
+"chg_1m": 2.88,
+"alpha_1d": -2.31,
+"alpha_1w": -1.88,
+"alpha_1m": -3.21,
+"turnover_rub": 7321994317.88,
+"turnover_vs_median20": 1.19,
+"flags": []
+},
+"VTBR": {
+"ok": true,
+"name": "ВТБ",
+"last_close": 55,
+"last_date": "2026-10-09",
+"now": 55.6,
+"cap_rub": 718783812729.6,
+"chg_1d": 2.21,
+"chg_1w": 5.77,
+"chg_1m": 7.17,
+"alpha_1d": -1.73,
+"alpha_1w": 0.42,
+"alpha_1m": 1.08,
+"turnover_rub": 4290266207.94,
+"turnover_vs_median20": 1.44,
+"flags": []
+},
+"T": {
+"ok": true,
+"name": "Т-Технологии",
+"last_close": 271.68,
+"last_date": "2026-10-09",
+"now": 267.22,
+"cap_rub": 716883883149.2,
+"chg_1d": 2.24,
+"chg_1w": 4.29,
+"chg_1m": 4.51,
+"alpha_1d": -1.7,
+"alpha_1w": -1.06,
+"alpha_1m": -1.58,
+"turnover_rub": 5030202511.06,
+"turnover_vs_median20": 1.08,
+"flags": []
+},
+"SVCB": {
+"ok": true,
+"name": "Совкомбанк",
+"last_close": 9.97,
+"last_date": "2026-10-09",
+"now": 9.98,
+"cap_rub": 224711964471.9,
+"chg_1d": 1.58,
+"chg_1w": 4.07,
+"chg_1m": 0.45,
+"alpha_1d": -2.36,
+"alpha_1w": -1.28,
+"alpha_1m": -5.64,
+"turnover_rub": 516556725.5,
+"turnover_vs_median20": 0.83,
+"flags": []
+},
+"MBNK": {
+"ok": true,
+"name": "МТС Банк",
+"last_close": 943,
+"last_date": "2026-10-09",
+"now": 941.5,
+"cap_rub": 35331328735.5,
+"chg_1d": 0.8,
+"chg_1w": 2.11,
+"chg_1m": 1.07,
+"alpha_1d": -3.14,
+"alpha_1w": -3.24,
+"alpha_1m": -5.02,
+"turnover_rub": 18782713,
+"turnover_vs_median20": 1.06,
+"flags": [
+"альфа за день -3.1 п.п."
+]
+},
+"OZON": {
+"ok": true,
+"name": "Озон",
+"last_close": 3246,
+"last_date": "2026-10-09",
+"now": 3234,
+"cap_rub": 699882012522,
+"chg_1d": 1.26,
+"chg_1w": 3.24,
+"chg_1m": 23.96,
+"alpha_1d": -2.68,
+"alpha_1w": -2.11,
+"alpha_1m": 17.87,
+"turnover_rub": 6299392644.5,
+"turnover_vs_median20": 1.41,
+"flags": []
+},
+"YDEX": {
+"ok": true,
+"name": "Яндекс",
+"last_close": 3455,
+"last_date": "2026-10-09",
+"now": 3373.5,
+"cap_rub": 1338966031006.5,
+"chg_1d": -3.41,
+"chg_1w": -4.11,
+"chg_1m": -9.89,
+"alpha_1d": -7.35,
+"alpha_1w": -9.46,
+"alpha_1m": -15.98,
+"turnover_rub": 21654143241.5,
+"turnover_vs_median20": 7.93,
+"flags": [
+"альфа за день -7.3 п.п.",
+"альфа за неделю -9.5 п.п.",
+"оборот x7.93 к медиане 20 дней"
+]
+},
+"RENI": {
+"ok": true,
+"name": "Ренессанс Страхование",
+"last_close": 70.78,
+"last_date": "2026-10-09",
+"now": 70.64,
+"cap_rub": 39343144379.2,
+"chg_1d": 3.27,
+"chg_1w": 3.84,
+"chg_1m": 1.75,
+"alpha_1d": -0.67,
+"alpha_1w": -1.51,
+"alpha_1m": -4.34,
+"turnover_rub": 50254292.6,
+"turnover_vs_median20": 1.1,
+"flags": []
+},
+"BSPB": {
+"ok": true,
+"name": "Банк Санкт-Петербург",
+"last_close": 250.13,
+"last_date": "2026-10-09",
+"now": 252.31,
+"cap_rub": 112370931533.51,
+"chg_1d": 0.87,
+"chg_1w": -8.11,
+"chg_1m": -0.46,
+"alpha_1d": -3.07,
+"alpha_1w": -13.46,
+"alpha_1m": -6.55,
+"turnover_rub": 311902968.6,
+"turnover_vs_median20": 1.22,
+"flags": [
+"альфа за день -3.1 п.п.",
+"альфа за неделю -13.5 п.п."
+]
+},
+"CBOM": {
+"ok": true,
+"name": "МКБ",
+"last_close": 9.655,
+"last_date": "2026-10-09",
+"now": 9.731,
+"cap_rub": 325304506706.05,
+"chg_1d": 5.46,
+"chg_1w": 14.5,
+"chg_1m": -4.88,
+"alpha_1d": 1.52,
+"alpha_1w": 9.15,
+"alpha_1m": -10.97,
+"turnover_rub": 252754313.4,
+"turnover_vs_median20": 1.85,
+"flags": [
+"альфа за неделю +9.2 п.п."
+]
+}
+},
+"errors": [],
+"index": {
+"IMOEX": {
+"chg_1d": 3.94,
+"chg_1w": 5.35,
+"chg_1m": 6.09,
+"last": 2401.8
+}
+},
+"delta": {
+"SBER": {
+"prev_close": 285.02,
+"move_since_prev": 0.0
+},
+"VTBR": {
+"prev_close": 55,
+"move_since_prev": 0.0
+},
+"T": {
+"prev_close": 271.68,
+"move_since_prev": 0.0
+},
+"SVCB": {
+"prev_close": 9.97,
+"move_since_prev": 0.0
+},
+"MBNK": {
+"prev_close": 943,
+"move_since_prev": 0.0
+},
+"OZON": {
+"prev_close": 3246,
+"move_since_prev": 0.0
+},
+"YDEX": {
+"prev_close": 3455,
+"move_since_prev": 0.0
+},
+"RENI": {
+"prev_close": 70.78,
+"move_since_prev": 0.0
+},
+"BSPB": {
+"prev_close": 250.13,
+"move_since_prev": 0.0
+},
+"CBOM": {
+"prev_close": 9.655,
+"move_since_prev": 0.0
+}
+}
+}
+},
+"digest": "<b>Сводка за 12.10.2026</b>\n\n<b>Условия у банков</b>\nБез изменений: проверено 27 из 34 страниц у 10 банков.\n\n<b>Новости</b>\n• runews24.ru: <a href=\"https://runews24.ru/economy/12/10/2026/banki-rezhut-limityi-po-kreditkam-rossiyane-uznayut-o-snizhenii-summ-uzhe-posle-pokupok\">Банки режут лимиты по кредиткам: россияне узнают о снижении сумм уже после покупок</a> — Банки снижают лимиты по кредитным картам, заёмщик узнаёт об этом уже после покупок.\n• Прайм: <a href=\"https://1prime.ru/20261012/asv-874135792.html\">АСВ может получить права требования по кредиту Ле Пен в России</a>.\n• Ведомости: <a href=\"https://www.vedomosti.ru/finance/articles/2026/10/12/1236125-tsb-utochnil-rascheti-stavki\">ЦБ уточнил расчеты ставки по семейной ипотеке после завершения господдержки</a> — После господдержки ставка по семейной ипотеке растёт максимум на 4 п. п. (процентные пункты) и не выше ключевой плюс 3 п. п.\n\n<b>Итоги недели</b> · 05.10–11.10\nИзменений условий: 15 у 5 банков; тихих дней: 2 из 7; новостей: 37.\n• <a href=\"https://uralsib.ru/kreditnye-karty\">Банк Уралсиб</a> — 5 изменений (кредитная карта).\n• <a href=\"https://www.sberbank.ru/ru/person/credits/money/consumer_unsecured\">Сбербанк</a> — 4 изменения (автокредит, кредит наличными).\n• <a href=\"https://www.gazprombank.ru/personal/credit-cards/\">Газпромбанк</a> — 3 изменения (кредитная карта).\n• <a href=\"https://www.tbank.ru/cards/credit-cards/\">Т-Банк</a> — 2 изменения (кредитная карта).\n• <a href=\"https://www.mtsbank.ru/chastnim-licam/krediti/credit-all/\">МТС-Банк</a> — 1 изменение (кредит наличными).",
+"n_pages": 27,
+"n_banks": 10,
+"streak": 0,
+"version": "1.6.0+661c20b"
+}
