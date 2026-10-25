@@ -1,0 +1,279 @@
+{
+"date": "2026-10-25",
+"chs": [],
+"news": [
+{
+"src": "Известия",
+"title": "Эксперт назвал условия для оформления кредитных каникул",
+"link": "https://iz.ru/2188505/2026-10-25/ekspert-nazval-usloviia-dlia-oformleniia-kreditnykh-kanikul",
+"desc": "<p>Кредитные каникулы — это мера поддержки в сложной финансовой ситуации, а не способ списать долг или отдохнуть от обязательств. Оформить отсрочку можно при снижении дохода за последние два месяца на 30% и более по сравнению со среднемесяч",
+"dt": "2026-10-25 08:30:00+03:00",
+"repeat": false
+},
+{
+"src": "Труба под Неглинной",
+"title": "Правительство обсуждает досрочное закрытие программы ИТ-ипотеки",
+"link": "https://t.me/trubapodneglinnoy/15177",
+"desc": "Правительство обсуждает досрочное закрытие программы ИТ-ипотеки\n\nПрограмма льготной ипотеки для ИТ-специалистов может быть свернута уже 1 декабря. Власти обсуждают завершение выдач из-за ограниченности бюджетных средств, однако окончательное решение пока не принято.\n\nВ настоящее время программа позволяет оформить жилищный кредит по ставке до 6% на сумму до 9 млн рублей. При комбинировании с другим",
+"dt": "2026-10-24 12:02:47+00:00",
+"via": "https://t.me/trubapodneglinnoy/15177",
+"ext": [],
+"repeat": false
+},
+{
+"src": "Frank Media",
+"title": "ЦБ не может выйти из дня сурка: почему прогноз снова ухудшается",
+"link": "https://frankmedia.ru/311859?utm_source=telegram&amp;utm_medium=messenger&amp;utm_campaign=tf",
+"desc": "🔃 ЦБ не может выйти из дня сурка: почему прогноз снова ухудшается\n\nВчера прошло последнее опорное заседание ЦБ в этом году — помимо решения по ключевой ставке, на нем также был обновлен прогноз по ее траектории, а также по инфляции, ВВП и другим показателям. Для многих участников рынка и аналитиков именно эта часть была важнее. Прогноз помогает понять, насколько быстро ЦБ исходя из нынешних услови",
+"dt": "2026-10-24 09:34:58+00:00",
+"via": "https://t.me/frank_media/24477",
+"ext": [
+"https://frankmedia.ru/311859?utm_source=telegram&amp;utm_medium=messenger&amp;utm_campaign=tf",
+"https://frankmedia.ru/newsletter?utm_source=email&amp;utm_medium=subscribepage&amp;utm_campaign=fm_footer"
+],
+"repeat": false
+}
+],
+"quotes": {
+"ts": "2026-10-25T05:21:27+00:00",
+"date": "2026-10-25",
+"data": {
+"source": "iss.moex.com (открытый ISS API, без ключа)",
+"not_listed": {
+"Газпромбанк": "акции не торгуются, публичны только облигации ГПБ",
+"Wildberries (RWB)": "непубличная компания, акций в обращении нет",
+"Альфа-Банк": "непубличная, акции не торгуются",
+"Райффайзенбанк": "дочка RBI, на Мосбирже не торгуется",
+"Почта Банк": "непубличная, вошёл в периметр ВТБ"
+},
+"tickers": {
+"SBER": {
+"ok": true,
+"name": "Сбербанк",
+"last_close": 292.32,
+"last_date": "2026-10-23",
+"now": 292.32,
+"cap_rub": 6310296639360,
+"chg_1d": 0.38,
+"chg_1w": 1.75,
+"chg_1m": 4.12,
+"alpha_1d": -1.17,
+"alpha_1w": 0.17,
+"alpha_1m": -2.67,
+"turnover_rub": 6682339373.41,
+"turnover_vs_median20": 0.96,
+"flags": []
+},
+"VTBR": {
+"ok": true,
+"name": "ВТБ",
+"last_close": 56.94,
+"last_date": "2026-10-23",
+"now": 56.94,
+"cap_rub": 736107019727.04,
+"chg_1d": 0.68,
+"chg_1w": 2.7,
+"chg_1m": 9.97,
+"alpha_1d": -0.87,
+"alpha_1w": 1.12,
+"alpha_1m": 3.18,
+"turnover_rub": 2893167043.72,
+"turnover_vs_median20": 0.66,
+"flags": []
+},
+"T": {
+"ok": true,
+"name": "Т-Технологии",
+"last_close": 269.66,
+"last_date": "2026-10-23",
+"now": 269.66,
+"cap_rub": 723429787927.6,
+"chg_1d": 0.29,
+"chg_1w": 0.04,
+"chg_1m": 3.58,
+"alpha_1d": -1.26,
+"alpha_1w": -1.54,
+"alpha_1m": -3.21,
+"turnover_rub": 5050990819.84,
+"turnover_vs_median20": 1.07,
+"flags": []
+},
+"SVCB": {
+"ok": true,
+"name": "Совкомбанк",
+"last_close": 10.325,
+"last_date": "2026-10-23",
+"now": 10.325,
+"cap_rub": 232480063444.12,
+"chg_1d": 1.82,
+"chg_1w": 1.82,
+"chg_1m": 6.72,
+"alpha_1d": 0.27,
+"alpha_1w": 0.24,
+"alpha_1m": -0.07,
+"turnover_rub": 594572205.5,
+"turnover_vs_median20": 0.93,
+"flags": []
+},
+"MBNK": {
+"ok": true,
+"name": "МТС Банк",
+"last_close": 933,
+"last_date": "2026-10-23",
+"now": 933,
+"cap_rub": 35012352321,
+"chg_1d": 0.32,
+"chg_1w": -1.06,
+"chg_1m": 0.38,
+"alpha_1d": -1.23,
+"alpha_1w": -2.64,
+"alpha_1m": -6.41,
+"turnover_rub": 57979670.5,
+"turnover_vs_median20": 2.14,
+"flags": []
+},
+"OZON": {
+"ok": true,
+"name": "Озон",
+"last_close": 3520.5,
+"last_date": "2026-10-23",
+"now": 3520.5,
+"cap_rub": 761884547026.5,
+"chg_1d": 1.02,
+"chg_1w": 0.09,
+"chg_1m": 19.74,
+"alpha_1d": -0.53,
+"alpha_1w": -1.49,
+"alpha_1m": 12.95,
+"turnover_rub": 3362363182,
+"turnover_vs_median20": 0.82,
+"flags": []
+},
+"YDEX": {
+"ok": true,
+"name": "Яндекс",
+"last_close": 3400,
+"last_date": "2026-10-23",
+"now": 3400,
+"cap_rub": 1349484068600,
+"chg_1d": 0.13,
+"chg_1w": -2.24,
+"chg_1m": -9.92,
+"alpha_1d": -1.42,
+"alpha_1w": -3.82,
+"alpha_1m": -16.71,
+"turnover_rub": 3867147106,
+"turnover_vs_median20": 1.21,
+"flags": []
+},
+"RENI": {
+"ok": true,
+"name": "Ренессанс Страхование",
+"last_close": 69.1,
+"last_date": "2026-10-23",
+"now": 69.1,
+"cap_rub": 38485437098,
+"chg_1d": -0.95,
+"chg_1w": -3.71,
+"chg_1m": 0.88,
+"alpha_1d": -2.5,
+"alpha_1w": -5.29,
+"alpha_1m": -5.91,
+"turnover_rub": 91598732.2,
+"turnover_vs_median20": 1.94,
+"flags": []
+},
+"BSPB": {
+"ok": true,
+"name": "Банк Санкт-Петербург",
+"last_close": 257.08,
+"last_date": "2026-10-23",
+"now": 257.08,
+"cap_rub": 112888381143.88,
+"chg_1d": 1.26,
+"chg_1w": 1.46,
+"chg_1m": -1.99,
+"alpha_1d": -0.29,
+"alpha_1w": -0.12,
+"alpha_1m": -8.78,
+"turnover_rub": 111374317.9,
+"turnover_vs_median20": 0.4,
+"flags": []
+},
+"CBOM": {
+"ok": true,
+"name": "МКБ",
+"last_close": 10.252,
+"last_date": "2026-10-23",
+"now": 10.252,
+"cap_rub": 342721385546.23,
+"chg_1d": 2.28,
+"chg_1w": 3.37,
+"chg_1m": 5.02,
+"alpha_1d": 0.73,
+"alpha_1w": 1.79,
+"alpha_1m": -1.77,
+"turnover_rub": 69985787,
+"turnover_vs_median20": 0.54,
+"flags": []
+}
+},
+"errors": [],
+"index": {
+"IMOEX": {
+"chg_1d": 1.55,
+"chg_1w": 1.58,
+"chg_1m": 6.79,
+"last": 2469.36
+}
+},
+"delta": {
+"SBER": {
+"prev_close": 292.32,
+"move_since_prev": 0.0
+},
+"VTBR": {
+"prev_close": 56.94,
+"move_since_prev": 0.0
+},
+"T": {
+"prev_close": 269.66,
+"move_since_prev": 0.0
+},
+"SVCB": {
+"prev_close": 10.325,
+"move_since_prev": 0.0
+},
+"MBNK": {
+"prev_close": 933,
+"move_since_prev": 0.0
+},
+"OZON": {
+"prev_close": 3520.5,
+"move_since_prev": 0.0
+},
+"YDEX": {
+"prev_close": 3400,
+"move_since_prev": 0.0
+},
+"RENI": {
+"prev_close": 69.1,
+"move_since_prev": 0.0
+},
+"BSPB": {
+"prev_close": 257.08,
+"move_since_prev": 0.0
+},
+"CBOM": {
+"prev_close": 10.252,
+"move_since_prev": 0.0
+}
+}
+}
+},
+"digest": "<b>Сводка за 25.10.2026</b>\n\n<b>Условия у банков</b>\nБез изменений: проверено 23 из 34 страниц у 8 банков.\n\n<b>Новости</b>\n• Frank Media: <a href=\"https://frankmedia.ru/311859?utm_source=telegram&amp;utm_medium=messenger&amp;utm_campaign=tf\">ЦБ не может выйти из дня сурка: почему прогноз снова ухудшается</a> — Ухудшение прогноза по ключевой ставке удерживает высокую стоимость фондирования и ставки по розничным кредитам.",
+"n_pages": 23,
+"n_banks": 8,
+"streak": 0,
+"version": "1.8.2+064a429"
+}
