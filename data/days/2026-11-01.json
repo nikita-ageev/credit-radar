@@ -1,0 +1,256 @@
+{
+"date": "2026-11-01",
+"chs": [],
+"news": [
+{
+"src": "ТАСС",
+"title": "С 2027 года банки и МФО должны будут дважды в год давать отчеты о сборе долгов",
+"link": "https://tass.ru/ekonomika/28275751",
+"desc": "В них нужно указывать юридический и фактический адреса организации, адреса кол-центров и других подразделений, которые занимаются возвратом просроченной задолженности, данные о самой деятельности по возврату средств, рассказал директор ФССП",
+"dt": "2026-11-01 08:32:39+03:00",
+"repeat": false
+}
+],
+"quotes": {
+"ts": "2026-11-01T05:21:28+00:00",
+"date": "2026-11-01",
+"data": {
+"source": "iss.moex.com (открытый ISS API, без ключа)",
+"not_listed": {
+"Газпромбанк": "акции не торгуются, публичны только облигации ГПБ",
+"Wildberries (RWB)": "непубличная компания, акций в обращении нет",
+"Альфа-Банк": "непубличная, акции не торгуются",
+"Райффайзенбанк": "дочка RBI, на Мосбирже не торгуется",
+"Почта Банк": "непубличная, вошёл в периметр ВТБ"
+},
+"tickers": {
+"SBER": {
+"ok": true,
+"name": "Сбербанк",
+"last_close": 296.25,
+"last_date": "2026-10-30",
+"now": 296.02,
+"cap_rub": 6390168346960,
+"chg_1d": 0.4,
+"chg_1w": 1.34,
+"chg_1m": 8.15,
+"alpha_1d": -0.12,
+"alpha_1w": -0.28,
+"alpha_1m": -2.55,
+"turnover_rub": 4416114588.63,
+"turnover_vs_median20": 0.61,
+"flags": []
+},
+"VTBR": {
+"ok": true,
+"name": "ВТБ",
+"last_close": 56.33,
+"last_date": "2026-10-30",
+"now": 56.47,
+"cap_rub": 730030969511.52,
+"chg_1d": -2.43,
+"chg_1w": -1.07,
+"chg_1m": 7.81,
+"alpha_1d": -2.95,
+"alpha_1w": -2.69,
+"alpha_1m": -2.89,
+"turnover_rub": 7921585508.23,
+"turnover_vs_median20": 1.83,
+"flags": []
+},
+"T": {
+"ok": true,
+"name": "Т-Технологии",
+"last_close": 277.12,
+"last_date": "2026-10-30",
+"now": 277.1,
+"cap_rub": 743389432006,
+"chg_1d": 0.43,
+"chg_1w": 2.77,
+"chg_1m": 10.3,
+"alpha_1d": -0.09,
+"alpha_1w": 1.15,
+"alpha_1m": -0.4,
+"turnover_rub": 3267710816.08,
+"turnover_vs_median20": 0.69,
+"flags": []
+},
+"SVCB": {
+"ok": true,
+"name": "Совкомбанк",
+"last_close": 10.745,
+"last_date": "2026-10-30",
+"now": 10.82,
+"cap_rub": 243625596752.1,
+"chg_1d": 0.47,
+"chg_1w": 4.07,
+"chg_1m": 15.29,
+"alpha_1d": -0.05,
+"alpha_1w": 2.45,
+"alpha_1m": 4.59,
+"turnover_rub": 643990431.5,
+"turnover_vs_median20": 0.98,
+"flags": []
+},
+"MBNK": {
+"ok": true,
+"name": "МТС Банк",
+"last_close": 959,
+"last_date": "2026-10-30",
+"now": 963.5,
+"cap_rub": 36156914749.5,
+"chg_1d": 0.89,
+"chg_1w": 2.79,
+"chg_1m": 5.1,
+"alpha_1d": 0.37,
+"alpha_1w": 1.17,
+"alpha_1m": -5.6,
+"turnover_rub": 23998083,
+"turnover_vs_median20": 0.76,
+"flags": []
+},
+"OZON": {
+"ok": true,
+"name": "Озон",
+"last_close": 3804,
+"last_date": "2026-10-30",
+"now": 3805.5,
+"cap_rub": 823562460931.5,
+"chg_1d": -0.81,
+"chg_1w": 8.05,
+"chg_1m": 25.98,
+"alpha_1d": -1.33,
+"alpha_1w": 6.43,
+"alpha_1m": 15.28,
+"turnover_rub": 5124521905.5,
+"turnover_vs_median20": 1.22,
+"flags": []
+},
+"YDEX": {
+"ok": true,
+"name": "Яндекс",
+"last_close": 3474,
+"last_date": "2026-10-30",
+"now": 3475.5,
+"cap_rub": 1379450553064.5,
+"chg_1d": 0.61,
+"chg_1w": 2.18,
+"chg_1m": -1.93,
+"alpha_1d": 0.09,
+"alpha_1w": 0.56,
+"alpha_1m": -12.63,
+"turnover_rub": 3186945131.5,
+"turnover_vs_median20": 0.76,
+"flags": []
+},
+"RENI": {
+"ok": true,
+"name": "Ренессанс Страхование",
+"last_close": 72.08,
+"last_date": "2026-10-30",
+"now": 72.2,
+"cap_rub": 40211990716,
+"chg_1d": 1.24,
+"chg_1w": 4.31,
+"chg_1m": 7.94,
+"alpha_1d": 0.72,
+"alpha_1w": 2.69,
+"alpha_1m": -2.76,
+"turnover_rub": 31081407.2,
+"turnover_vs_median20": 0.56,
+"flags": []
+},
+"BSPB": {
+"ok": true,
+"name": "Банк Санкт-Петербург",
+"last_close": 256.17,
+"last_date": "2026-10-30",
+"now": 257,
+"cap_rub": 112853251727,
+"chg_1d": -1.23,
+"chg_1w": -0.35,
+"chg_1m": -3.26,
+"alpha_1d": -1.75,
+"alpha_1w": -1.97,
+"alpha_1m": -13.96,
+"turnover_rub": 91069934,
+"turnover_vs_median20": 0.4,
+"flags": []
+},
+"CBOM": {
+"ok": true,
+"name": "МКБ",
+"last_close": 10.477,
+"last_date": "2026-10-30",
+"now": 10.465,
+"cap_rub": 349841913747.69,
+"chg_1d": 1.11,
+"chg_1w": 2.19,
+"chg_1m": 18.63,
+"alpha_1d": 0.59,
+"alpha_1w": 0.57,
+"alpha_1m": 7.93,
+"turnover_rub": 51991005.6,
+"turnover_vs_median20": 0.54,
+"flags": []
+}
+},
+"errors": [],
+"index": {
+"IMOEX": {
+"chg_1d": 0.52,
+"chg_1w": 1.62,
+"chg_1m": 10.7,
+"last": 2509.26
+}
+},
+"delta": {
+"SBER": {
+"prev_close": 296.25,
+"move_since_prev": 0.0
+},
+"VTBR": {
+"prev_close": 56.33,
+"move_since_prev": 0.0
+},
+"T": {
+"prev_close": 277.12,
+"move_since_prev": 0.0
+},
+"SVCB": {
+"prev_close": 10.745,
+"move_since_prev": 0.0
+},
+"MBNK": {
+"prev_close": 959,
+"move_since_prev": 0.0
+},
+"OZON": {
+"prev_close": 3804,
+"move_since_prev": 0.0
+},
+"YDEX": {
+"prev_close": 3474,
+"move_since_prev": 0.0
+},
+"RENI": {
+"prev_close": 72.08,
+"move_since_prev": 0.0
+},
+"BSPB": {
+"prev_close": 256.17,
+"move_since_prev": 0.0
+},
+"CBOM": {
+"prev_close": 10.477,
+"move_since_prev": 0.0
+}
+}
+}
+},
+"digest": "<b>Сводка за 01.11.2026</b>\n\n<b>Условия у банков</b>\nБез изменений: проверено 25 из 34 страниц у 9 банков.\n\n<b>Новости</b>\n• ТАСС: <a href=\"https://tass.ru/ekonomika/28275751\">С 2027 года банки и МФО должны будут дважды в год давать отчеты о сборе долгов</a>.",
+"n_pages": 25,
+"n_banks": 9,
+"streak": 1,
+"version": "1.10.1+508de6c"
+}
