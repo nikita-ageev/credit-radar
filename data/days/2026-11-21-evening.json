@@ -1,0 +1,117 @@
+{
+"date": "2026-11-21",
+"ts": "2026-11-21T20:00:02.519262+00:00",
+"version": "1.13.1+6930594",
+"input": [
+{
+"src": "finuslugi.ru",
+"title": "Индекс Финуслуг: один банк из топ-20 изменил ставку по кредитам наличными за неделю | Пресс-центр Финуслуг",
+"link": "https://finuslugi.ru/presscenter/pressrelease/indexkredity19112026",
+"desc": "19.11.2026 Индекс Финуслуг: один банк из топ-20 изменил ставку по кредитам наличными за неделю ПСК в топ-20 по состоянию на 19 ноября варьируется от 13,88% до 55,44%. ​Индекс полной стоимости кредита наличными (ПСК), рассчитываемый Финуслуг",
+"dt": "2026-11-19T00:00:00+00:00",
+"repeat": false
+},
+{
+"src": "1000inf.ru",
+"title": "Год назад объем просрочки по розничным кредитам в Ивановской области перескочил за 7 миллиардов",
+"link": "https://1000inf.ru/news/117877/",
+"desc": "Автор: Александр Элькинд 1 мин 20 ноября, 2026 «Слухи и факты» писали. Уровень просроченной задолженности в рознице без учёта ипотеки в России превысил 13% от общего портфеля, достигнув 1,46 трлн рублей. С начала года объём неплатежей увели",
+"dt": "2026-11-20T00:00:00+00:00",
+"repeat": false
+},
+{
+"src": "СРО МиР",
+"title": "Опубликован График плановых проверок МФО – членов СРО «МиР» на 2027 год!",
+"link": "https://npmir.ru/news/mir-news/12577/",
+"dt": "2026-11-20T12:00:00+03:00",
+"desc": "",
+"repeat": false
+},
+{
+"src": "СРО МиР",
+"title": "Банк России опубликовал новые среднерыночные значения ПСК для МФО на I квартал 2027 года",
+"link": "https://npmir.ru/news/regulation/12573/",
+"dt": "2026-11-20T12:00:00+03:00",
+"desc": "",
+"repeat": false
+},
+{
+"src": "Банк России",
+"title": "Разработка проектов нормативных актов, регулирующих отчетность кредитных организаций",
+"link": "https://www.cbr.ru/statistics/reporting/optimization/#a_159181",
+"desc": "",
+"dt": "2026-11-20T14:50:33+03:00",
+"repeat": false
+}
+],
+"items": [
+{
+"title": "Индекс Финуслуг: один банк из топ-20 изменил ставку по кредитам наличными за неделю | Пресс-центр Финуслуг",
+"src": "finuslugi.ru",
+"link": "https://finuslugi.ru/presscenter/pressrelease/indexkredity19112026",
+"article_chars": 1671,
+"article_how": "http/trafilatura",
+"extraction_error": {
+"type": "Deferred",
+"http_status": null
+},
+"gate": "ошибка извлечения; содержание не оценено"
+},
+{
+"title": "Год назад объем просрочки по розничным кредитам в Ивановской области перескочил за 7 миллиардов",
+"src": "1000inf.ru",
+"link": "https://1000inf.ru/news/117877/",
+"article_chars": 637,
+"article_how": "http/trafilatura",
+"extraction_error": {
+"type": "Deferred",
+"http_status": null
+},
+"gate": "ошибка извлечения; содержание не оценено"
+},
+{
+"title": "Опубликован График плановых проверок МФО – членов СРО «МиР» на 2027 год!",
+"src": "СРО МиР",
+"link": "https://npmir.ru/news/mir-news/12577/",
+"article_chars": 729,
+"article_how": "http/trafilatura",
+"extraction_error": {
+"type": "Deferred",
+"http_status": null
+},
+"gate": "ошибка извлечения; содержание не оценено"
+},
+{
+"title": "Банк России опубликовал новые среднерыночные значения ПСК для МФО на I квартал 2027 года",
+"src": "СРО МиР",
+"link": "https://npmir.ru/news/regulation/12573/",
+"article_chars": 4095,
+"article_how": "http/trafilatura",
+"extraction_error": {
+"type": "Deferred",
+"http_status": null
+},
+"gate": "ошибка извлечения; содержание не оценено"
+},
+{
+"title": "Разработка проектов нормативных актов, регулирующих отчетность кредитных организаций",
+"src": "Банк России",
+"link": "https://www.cbr.ru/statistics/reporting/optimization/#a_159181",
+"article_chars": 1854,
+"article_how": "http/trafilatura",
+"extraction_error": {
+"type": "Deferred",
+"http_status": null
+},
+"gate": "ошибка извлечения; содержание не оценено"
+}
+],
+"text": "",
+"dropped": 5,
+"kept": 0,
+"judged": 0,
+"cost_usd": 0.0,
+"seconds": 1434,
+"extraction_failures": 5,
+"source_failures": 0
+}
