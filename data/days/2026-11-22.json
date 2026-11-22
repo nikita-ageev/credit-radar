@@ -1,0 +1,569 @@
+{
+"date": "2026-11-22",
+"chs": [],
+"news": [],
+"quotes": {
+"ts": "2026-11-22T05:21:27+00:00",
+"date": "2026-11-22",
+"data": {
+"source": "iss.moex.com (открытый ISS API, без ключа)",
+"not_listed": {
+"Газпромбанк": "акции не торгуются, публичны только облигации ГПБ",
+"Wildberries (RWB)": "непубличная компания, акций в обращении нет",
+"Альфа-Банк": "непубличная, акции не торгуются",
+"Райффайзенбанк": "дочка RBI, на Мосбирже не торгуется",
+"Почта Банк": "непубличная, вошёл в периметр ВТБ"
+},
+"tickers": {
+"SBER": {
+"ok": true,
+"name": "Сбербанк",
+"last_close": 287.74,
+"last_date": "2026-11-20",
+"now": 286.53,
+"cap_rub": 6185308210440,
+"chg_1d": -2.09,
+"chg_1w": -4.03,
+"chg_1m": -1.95,
+"alpha_1d": 0.6,
+"alpha_1w": 2.21,
+"alpha_1m": 2.82,
+"turnover_rub": 10551220271.28,
+"turnover_vs_median20": 1.65,
+"periods": {
+"1d": {
+"start_date": "2026-11-19",
+"end_date": "2026-11-20",
+"before": 293.87,
+"after": 287.74,
+"index_before": 2419.43,
+"index_after": 2354.4,
+"change": -2.09,
+"index_change": -2.69
+},
+"1w": {
+"start_date": "2026-11-13",
+"end_date": "2026-11-20",
+"before": 299.83,
+"after": 287.74,
+"index_before": 2511.1,
+"index_after": 2354.4,
+"change": -4.03,
+"index_change": -6.24
+},
+"1m": {
+"start_date": "2026-10-20",
+"end_date": "2026-11-20",
+"before": 293.45,
+"after": 287.74,
+"index_before": 2472.26,
+"index_after": 2354.4,
+"change": -1.95,
+"index_change": -4.77
+}
+},
+"flags": []
+},
+"VTBR": {
+"ok": true,
+"name": "ВТБ",
+"last_close": 55.705,
+"last_date": "2026-11-20",
+"now": 54.83,
+"cap_rub": 708829432589.28,
+"chg_1d": -5.88,
+"chg_1w": -10.58,
+"chg_1m": -3.33,
+"alpha_1d": -3.19,
+"alpha_1w": -4.34,
+"alpha_1m": 1.44,
+"turnover_rub": 7978331388.77,
+"turnover_vs_median20": 2.0,
+"periods": {
+"1d": {
+"start_date": "2026-11-19",
+"end_date": "2026-11-20",
+"before": 59.185,
+"after": 55.705,
+"index_before": 2419.43,
+"index_after": 2354.4,
+"change": -5.88,
+"index_change": -2.69
+},
+"1w": {
+"start_date": "2026-11-13",
+"end_date": "2026-11-20",
+"before": 62.295,
+"after": 55.705,
+"index_before": 2511.1,
+"index_after": 2354.4,
+"change": -10.58,
+"index_change": -6.24
+},
+"1m": {
+"start_date": "2026-10-20",
+"end_date": "2026-11-20",
+"before": 57.625,
+"after": 55.705,
+"index_before": 2472.26,
+"index_after": 2354.4,
+"change": -3.33,
+"index_change": -4.77
+}
+},
+"flags": [
+"альфа за день -3.2 п.п."
+]
+},
+"T": {
+"ok": true,
+"name": "Т-Технологии",
+"last_close": 278.84,
+"last_date": "2026-11-20",
+"now": 276.06,
+"cap_rub": 740599374231.6,
+"chg_1d": -2.24,
+"chg_1w": -5.05,
+"chg_1m": 2.09,
+"alpha_1d": 0.45,
+"alpha_1w": 1.19,
+"alpha_1m": 6.86,
+"turnover_rub": 7277863783.82,
+"turnover_vs_median20": 1.41,
+"periods": {
+"1d": {
+"start_date": "2026-11-19",
+"end_date": "2026-11-20",
+"before": 285.22,
+"after": 278.84,
+"index_before": 2419.43,
+"index_after": 2354.4,
+"change": -2.24,
+"index_change": -2.69
+},
+"1w": {
+"start_date": "2026-11-13",
+"end_date": "2026-11-20",
+"before": 293.68,
+"after": 278.84,
+"index_before": 2511.1,
+"index_after": 2354.4,
+"change": -5.05,
+"index_change": -6.24
+},
+"1m": {
+"start_date": "2026-10-20",
+"end_date": "2026-11-20",
+"before": 273.12,
+"after": 278.84,
+"index_before": 2472.26,
+"index_after": 2354.4,
+"change": 2.09,
+"index_change": -4.77
+}
+},
+"flags": []
+},
+"SVCB": {
+"ok": true,
+"name": "Совкомбанк",
+"last_close": 10.82,
+"last_date": "2026-11-20",
+"now": 10.64,
+"cap_rub": 239572675549.2,
+"chg_1d": -3.09,
+"chg_1w": -0.28,
+"chg_1m": 4.59,
+"alpha_1d": -0.4,
+"alpha_1w": 5.96,
+"alpha_1m": 9.36,
+"turnover_rub": 1518997362.5,
+"turnover_vs_median20": 1.89,
+"periods": {
+"1d": {
+"start_date": "2026-11-19",
+"end_date": "2026-11-20",
+"before": 11.165,
+"after": 10.82,
+"index_before": 2419.43,
+"index_after": 2354.4,
+"change": -3.09,
+"index_change": -2.69
+},
+"1w": {
+"start_date": "2026-11-13",
+"end_date": "2026-11-20",
+"before": 10.85,
+"after": 10.82,
+"index_before": 2511.1,
+"index_after": 2354.4,
+"change": -0.28,
+"index_change": -6.24
+},
+"1m": {
+"start_date": "2026-10-20",
+"end_date": "2026-11-20",
+"before": 10.345,
+"after": 10.82,
+"index_before": 2472.26,
+"index_after": 2354.4,
+"change": 4.59,
+"index_change": -4.77
+}
+},
+"flags": []
+},
+"MBNK": {
+"ok": true,
+"name": "МТС Банк",
+"last_close": 937,
+"last_date": "2026-11-20",
+"now": 931,
+"cap_rub": 34937299047,
+"chg_1d": -3.45,
+"chg_1w": -7.0,
+"chg_1m": -1.88,
+"alpha_1d": -0.76,
+"alpha_1w": -0.76,
+"alpha_1m": 2.89,
+"turnover_rub": 61190558,
+"turnover_vs_median20": 1.05,
+"periods": {
+"1d": {
+"start_date": "2026-11-19",
+"end_date": "2026-11-20",
+"before": 970.5,
+"after": 937,
+"index_before": 2419.43,
+"index_after": 2354.4,
+"change": -3.45,
+"index_change": -2.69
+},
+"1w": {
+"start_date": "2026-11-13",
+"end_date": "2026-11-20",
+"before": 1007.5,
+"after": 937,
+"index_before": 2511.1,
+"index_after": 2354.4,
+"change": -7.0,
+"index_change": -6.24
+},
+"1m": {
+"start_date": "2026-10-20",
+"end_date": "2026-11-20",
+"before": 955,
+"after": 937,
+"index_before": 2472.26,
+"index_after": 2354.4,
+"change": -1.88,
+"index_change": -4.77
+}
+},
+"flags": []
+},
+"OZON": {
+"ok": true,
+"name": "Озон",
+"last_close": 3449.5,
+"last_date": "2026-11-20",
+"now": 3366,
+"cap_rub": 728448625278,
+"chg_1d": -3.58,
+"chg_1w": -8.92,
+"chg_1m": -2.86,
+"alpha_1d": -0.89,
+"alpha_1w": -2.68,
+"alpha_1m": 1.91,
+"turnover_rub": 5402002994,
+"turnover_vs_median20": 1.52,
+"periods": {
+"1d": {
+"start_date": "2026-11-19",
+"end_date": "2026-11-20",
+"before": 3577.5,
+"after": 3449.5,
+"index_before": 2419.43,
+"index_after": 2354.4,
+"change": -3.58,
+"index_change": -2.69
+},
+"1w": {
+"start_date": "2026-11-13",
+"end_date": "2026-11-20",
+"before": 3787.5,
+"after": 3449.5,
+"index_before": 2511.1,
+"index_after": 2354.4,
+"change": -8.92,
+"index_change": -6.24
+},
+"1m": {
+"start_date": "2026-10-20",
+"end_date": "2026-11-20",
+"before": 3551,
+"after": 3449.5,
+"index_before": 2472.26,
+"index_after": 2354.4,
+"change": -2.86,
+"index_change": -4.77
+}
+},
+"flags": []
+},
+"YDEX": {
+"ok": true,
+"name": "Яндекс",
+"last_close": 3277.5,
+"last_date": "2026-11-20",
+"now": 3261,
+"cap_rub": 1294313984619,
+"chg_1d": -2.27,
+"chg_1w": -4.65,
+"chg_1m": -5.93,
+"alpha_1d": 0.42,
+"alpha_1w": 1.59,
+"alpha_1m": -1.16,
+"turnover_rub": 3021240641.5,
+"turnover_vs_median20": 0.94,
+"periods": {
+"1d": {
+"start_date": "2026-11-19",
+"end_date": "2026-11-20",
+"before": 3353.5,
+"after": 3277.5,
+"index_before": 2419.43,
+"index_after": 2354.4,
+"change": -2.27,
+"index_change": -2.69
+},
+"1w": {
+"start_date": "2026-11-13",
+"end_date": "2026-11-20",
+"before": 3437.5,
+"after": 3277.5,
+"index_before": 2511.1,
+"index_after": 2354.4,
+"change": -4.65,
+"index_change": -6.24
+},
+"1m": {
+"start_date": "2026-10-20",
+"end_date": "2026-11-20",
+"before": 3484,
+"after": 3277.5,
+"index_before": 2472.26,
+"index_after": 2354.4,
+"change": -5.93,
+"index_change": -4.77
+}
+},
+"flags": []
+},
+"RENI": {
+"ok": true,
+"name": "Ренессанс Страхование",
+"last_close": 66.78,
+"last_date": "2026-11-20",
+"now": 66.24,
+"cap_rub": 36892552147.2,
+"chg_1d": -2.51,
+"chg_1w": -6.42,
+"chg_1m": -6.73,
+"alpha_1d": 0.18,
+"alpha_1w": -0.18,
+"alpha_1m": -1.96,
+"turnover_rub": 87609947.2,
+"turnover_vs_median20": 1.44,
+"periods": {
+"1d": {
+"start_date": "2026-11-19",
+"end_date": "2026-11-20",
+"before": 68.5,
+"after": 66.78,
+"index_before": 2419.43,
+"index_after": 2354.4,
+"change": -2.51,
+"index_change": -2.69
+},
+"1w": {
+"start_date": "2026-11-13",
+"end_date": "2026-11-20",
+"before": 71.36,
+"after": 66.78,
+"index_before": 2511.1,
+"index_after": 2354.4,
+"change": -6.42,
+"index_change": -6.24
+},
+"1m": {
+"start_date": "2026-10-20",
+"end_date": "2026-11-20",
+"before": 71.6,
+"after": 66.78,
+"index_before": 2472.26,
+"index_after": 2354.4,
+"change": -6.73,
+"index_change": -4.77
+}
+},
+"flags": []
+},
+"BSPB": {
+"ok": true,
+"name": "Банк Санкт-Петербург",
+"last_close": 242.21,
+"last_date": "2026-11-20",
+"now": 239.23,
+"cap_rub": 105050130002.53,
+"chg_1d": -2.38,
+"chg_1w": -5.78,
+"chg_1m": -5.53,
+"alpha_1d": 0.31,
+"alpha_1w": 0.46,
+"alpha_1m": -0.76,
+"turnover_rub": 123568199.1,
+"turnover_vs_median20": 1.1,
+"periods": {
+"1d": {
+"start_date": "2026-11-19",
+"end_date": "2026-11-20",
+"before": 248.12,
+"after": 242.21,
+"index_before": 2419.43,
+"index_after": 2354.4,
+"change": -2.38,
+"index_change": -2.69
+},
+"1w": {
+"start_date": "2026-11-13",
+"end_date": "2026-11-20",
+"before": 257.06,
+"after": 242.21,
+"index_before": 2511.1,
+"index_after": 2354.4,
+"change": -5.78,
+"index_change": -6.24
+},
+"1m": {
+"start_date": "2026-10-20",
+"end_date": "2026-11-20",
+"before": 256.4,
+"after": 242.21,
+"index_before": 2472.26,
+"index_after": 2354.4,
+"change": -5.53,
+"index_change": -4.77
+}
+},
+"flags": []
+},
+"CBOM": {
+"ok": true,
+"name": "МКБ",
+"last_close": 10.02,
+"last_date": "2026-11-20",
+"now": 9.928,
+"cap_rub": 331890159549.65,
+"chg_1d": -1.27,
+"chg_1w": -10.69,
+"chg_1m": -3.1,
+"alpha_1d": 1.42,
+"alpha_1w": -4.45,
+"alpha_1m": 1.67,
+"turnover_rub": 167065814,
+"turnover_vs_median20": 2.2,
+"periods": {
+"1d": {
+"start_date": "2026-11-19",
+"end_date": "2026-11-20",
+"before": 10.149,
+"after": 10.02,
+"index_before": 2419.43,
+"index_after": 2354.4,
+"change": -1.27,
+"index_change": -2.69
+},
+"1w": {
+"start_date": "2026-11-13",
+"end_date": "2026-11-20",
+"before": 11.219,
+"after": 10.02,
+"index_before": 2511.1,
+"index_after": 2354.4,
+"change": -10.69,
+"index_change": -6.24
+},
+"1m": {
+"start_date": "2026-10-20",
+"end_date": "2026-11-20",
+"before": 10.341,
+"after": 10.02,
+"index_before": 2472.26,
+"index_after": 2354.4,
+"change": -3.1,
+"index_change": -4.77
+}
+},
+"flags": []
+}
+},
+"errors": [],
+"index": {
+"IMOEX": {
+"chg_1d": -2.69,
+"chg_1w": -6.24,
+"chg_1m": -4.77,
+"last": 2354.4
+}
+},
+"delta": {
+"SBER": {
+"prev_close": 287.74,
+"move_since_prev": 0.0
+},
+"VTBR": {
+"prev_close": 55.705,
+"move_since_prev": 0.0
+},
+"T": {
+"prev_close": 278.84,
+"move_since_prev": 0.0
+},
+"SVCB": {
+"prev_close": 10.82,
+"move_since_prev": 0.0
+},
+"MBNK": {
+"prev_close": 937,
+"move_since_prev": 0.0
+},
+"OZON": {
+"prev_close": 3449.5,
+"move_since_prev": 0.0
+},
+"YDEX": {
+"prev_close": 3277.5,
+"move_since_prev": 0.0
+},
+"RENI": {
+"prev_close": 66.78,
+"move_since_prev": 0.0
+},
+"BSPB": {
+"prev_close": 242.21,
+"move_since_prev": 0.0
+},
+"CBOM": {
+"prev_close": 10.02,
+"move_since_prev": 0.0
+}
+}
+}
+},
+"digest": "<b>Сводка за 22.11.2026</b>\n\n<b>Условия у банков</b>\nБез изменений: проверено 29 из 34 страниц у 10 банков.\n\n<b>Новости</b>\nВ проверенных источниках нет дополнительных новостей, прошедших отбор.",
+"n_pages": 29,
+"n_banks": 10,
+"streak": 0,
+"version": "1.13.1+42c168f"
+}
